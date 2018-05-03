@@ -86,7 +86,7 @@ class AppComponent extends React.Component {
       <div className="index">
 
     <header>
-          <h1>hyperactive.media</h1>
+        {/*  <h1>hyperactive.media</h1>*/}
 
            {/* <FacebookProvider appId="1231592460258402">
               <Share href="https://geoart.hyperactive.media">
@@ -95,7 +95,7 @@ class AppComponent extends React.Component {
     </FacebookProvider>
   */}
 
-        <div>
+      {/*  <div>
           <button className ="btn btn-share" onClick = {() => {
 
 
@@ -135,7 +135,7 @@ class AppComponent extends React.Component {
               ;
 
           }}><span className ="glyphicon glyphicon-share-alt"/> <span>  share your creation</span></button>
-        </div>
+        </div>*/}
 
 
         </header>

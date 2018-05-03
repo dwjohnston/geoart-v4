@@ -57,7 +57,7 @@ class GenericParameterContainer extends Component {
   render() {
     const { param } = this.props;
 
-    switch(param) {
+    switch(param.constructor) {
 
       case Parameter: return <ComponentSlider param = {param} changeEvent = {(v) => this.changeParameter(v)}  />;
       case Color: return <ComponentColorPicker color = {param} changeEvent = {(v) => this.changeColor(v)}/>;

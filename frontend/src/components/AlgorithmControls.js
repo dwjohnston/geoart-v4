@@ -165,9 +165,9 @@ class AlgorithmControls extends React.Component {
         let key = [this.props.algorithm.name, param.label, "tab", i++].join("-");
 
         tabs.push(<Tab className = {"react-tabs__tab " + param.className} key = {key}>
-        {param.constructor === Planet &&
+         {param.constructor === Planet &&
           <PlanetPreview planet = {param}/>
-        }
+        } <span/> 
       </Tab>);
     }
     return tabs;
