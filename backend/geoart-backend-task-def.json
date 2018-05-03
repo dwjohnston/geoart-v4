@@ -1,0 +1,19 @@
+{
+    "family": "geoart-backend",
+    "containerDefinitions": [
+        {
+            "name": "geoart-backend",
+            "image": "602485504825.dkr.ecr.ap-southeast-2.amazonaws.com/geoart-backend",
+            "cpu": 10,
+            "memory": 500,
+            "portMappings": [
+                {
+                    "containerPort": 8080,
+                    "hostPort": 80
+                }
+            ],
+
+            "essential": true
+        }
+    ]
+}
