@@ -1,0 +1,24 @@
+.colorparam-component {
+
+  display: flex;
+  flex-flow: row nowrap;
+
+  &> div {
+    margin: 1em 0.4em;
+  }
+
+
+
+  //Importants are overriding enforced style that comes from the library
+  //Can use their parent and helper components, but for now, this is working. 
+  &>div>div>div {
+      border-radius: 0.2em !important;
+  }
+
+  &>div>div>div>div>div {
+    width: 60px !important;
+    border-radius: 0.4em !important;
+
+    transform: translate(0px, -9px) !important;
+  }
+}

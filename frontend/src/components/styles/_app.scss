@@ -1,0 +1,50 @@
+
+@import "controls";
+@import "header";
+
+
+
+.index, .main {
+  background-color: $color-panel-grey;
+
+}
+
+.main {
+
+  flex: 1 0 auto;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+
+  @include landscape {
+    flex-flow: row nowrap;
+  }
+
+  .canvas-container {
+    flex: 1 0 auto;
+    margin: 0.8em;
+    box-sizing: border-box;
+    position: relative;
+
+    //flex: 0 1 calc(100vw - 1.6em);
+    @include landscape{
+      flex: 0 1 calc(100vh - 1.6em);
+    }
+
+    canvas {
+      border: solid 1px $color-border-grey;
+      box-sizing: border-box;
+    }
+  }
+
+
+  .controls {
+    flex: 0 0 20em;
+
+    @include landscape {
+      flex: 1 0 40em;
+    }
+  }
+}

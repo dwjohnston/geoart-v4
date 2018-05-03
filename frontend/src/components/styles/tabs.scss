@@ -1,0 +1,46 @@
+@import "theme";
+
+.react-tabs {
+
+  display: flex;
+  flex: 1 0 auto;
+  flex-flow: column nowrap;
+
+  .planet-preview {
+    height: 1em;
+    border-radius: 0.5em;
+    width: 1em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  ul {
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 0;
+    border: none;
+
+    background-color: $color-tabs-grey;
+    padding: 0.2em 0.2em 0;
+
+    li {
+      flex: 1 0 auto;
+      text-align: center;
+
+      color: $color-off-white;
+      border: none;
+
+
+      background-color:  $color-tabs-grey;
+
+      &.react-tabs__tab--selected {
+        background-color: $color-background-grey;
+      }
+    }
+  }
+
+  div.react-tabs__tab-panel {
+    flex: 1 0 auto;
+  }
+
+}

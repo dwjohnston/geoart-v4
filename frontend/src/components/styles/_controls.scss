@@ -1,0 +1,71 @@
+
+  .controls {
+
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+
+
+    .algorithmcontrols-component {
+
+      flex: 1 0 auto;
+      display: flex;
+      flex-flow: column nowrap;
+
+
+
+      .react-tabs__tab-panel--selected {
+        display: block;
+        position: relative;
+
+        // justify-content: flex-start;
+      }
+
+      /* sub panels within a tab*/
+
+      .controls-container {
+
+        position: absolute;
+        left:0;
+        right:0;
+        top:0;
+        bottom:0;
+
+        >.controls-container  {
+          position: static;
+          padding: 0;
+          border: none;
+        }
+
+        display: flex;
+        flex-flow: row nowrap;
+        overflow-x: auto;
+        align-items: stretch;
+        justify-content: flex-start;
+
+        @include landscape {
+          align-items: flex-start;
+        }
+
+
+
+
+
+        padding: 0.4em 0.2em;
+        border: 1px solid $color-border-grey;
+
+
+        background-color: $color-panel-grey;
+
+        &>div {
+          //This doesn't feel like the right way to do this, but.
+          flex: 0 0 auto;
+
+        }
+
+
+      }
+    }
+  }

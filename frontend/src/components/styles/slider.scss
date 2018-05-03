@@ -1,0 +1,51 @@
+@import "theme";
+
+
+
+/*
+A container of several sliders
+*/
+
+.controls-container{
+  &> div {
+    border: solid 2px $color-panel-component-border-grey;
+    margin: 0 0.2rem;
+
+    background-color: $color-panel-component-grey;
+
+  }
+}
+
+.slider-container {
+  display: flex;
+  flex-flow: row nowrap;
+
+
+
+  h3 {
+    flex: 1 0 100%;
+  }
+
+}
+
+/*
+A wrapper around a slider, with labels
+*/
+
+.round-slider-container {
+
+
+  margin: 0; 
+  .label {
+    font-size: 1.4rem;
+    margin-top: 0.7rem;
+  }
+
+  .Slider{
+
+    width: 7em;
+    height: 7em;
+    margin: 0.5em;
+  }
+
+}

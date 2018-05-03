@@ -1,0 +1,22 @@
+header {
+
+
+  h1 {
+    font-size: 2rem;
+  }
+  padding: 0.25em;
+  padding-bottom: 0;
+  &> div {
+
+    display: flex;
+    flex-flow: row nowrap;
+
+    justify-content: flex-end;
+
+    .btn {
+      color: $color-off-white;
+      border: solid 1px $color-off-white;
+      background-color: $color-background-grey; 
+    }
+  }
+}

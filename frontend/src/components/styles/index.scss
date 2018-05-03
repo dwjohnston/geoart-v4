@@ -1,0 +1,56 @@
+@import "mixins/media";
+
+@import "theme";
+@import "typography";
+
+@import "app";
+
+@import "carousel";
+@import "buttons";
+@import "share";
+
+/***
+  Just set stuff like body in here.
+
+
+  Height and overflow stuff for html,body set in the index.html
+*/
+
+html, body, #app, .index {
+  height: 100%;
+  overflow: hidden;
+}
+
+body, #app, .index, .main{
+  margin: 0;
+  padding: 0;
+}
+
+
+.index {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+
+
+
+
+
+/**
+test crap
+
+*/
+
+.test-component {
+  height: 2em;
+}
+
+pre {
+  // white-space: normal;
+  // word-wrap: break-word;
+
+  text-align: left;
+}

@@ -1,0 +1,23 @@
+button.glyphicon {
+  color: $color-white;
+}
+
+.btn {
+  background-color: transparent;
+  color: unset;
+  color: $color_white;
+  border: solid 2px $color-white;
+  border-radius: 0.5em;
+
+  &.btn-large {
+
+    font-size: 2rem;
+    padding: 0.25em;
+    margin: 0.25em;
+  }
+
+  &.btn-xlarge {
+    font-size: 3rem;
+  }
+
+}

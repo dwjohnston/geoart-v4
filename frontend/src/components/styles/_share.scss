@@ -1,0 +1,65 @@
+.share-overlay {
+
+  border: solid 2px white;
+  border-radius: 1em;
+
+
+  position: fixed;
+  left: 1em;
+  right: 1em;
+  top: 1em;
+  bottom: 1em;
+  display:none;
+
+  background-color: $color-background-grey;
+  z-index: 2;
+  &.visible{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+  }
+
+
+
+
+  .share-header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+
+    h2 {
+      flex: 1 0 auto;
+    }
+  }
+
+  .share-buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 0.5em;
+    align-items: stretch;
+
+
+    &>* {
+      margin-left: 1rem;
+
+    }
+
+    a {
+      width: 64px;
+      height: 64px;
+    }
+  }
+
+  .share-image-container {
+
+    flex: 1 0 auto;
+    position:relative;
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      position: absolute;
+    }
+
+  }
+}
