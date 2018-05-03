@@ -1,5 +1,4 @@
 import React from 'react';
-import "./styles/tabs.scss";
 
 
 class PlanetPreview extends React.Component {
@@ -20,6 +19,9 @@ class PlanetPreview extends React.Component {
   }
 
   render() {
+
+      console.log(this.state.color); 
+
     return (
       <div className="planet-preview" style = {{border: 'solid 2px ' + this.state.color.shift(50,0.5).toString()}} >
       </div>

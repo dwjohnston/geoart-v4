@@ -1,6 +1,4 @@
 import React from 'react';
-import cssmodules from 'react-css-modules';
-import styles from './styles/sliderwrapper.cssmodule.scss';
 import RoundSlider from "blacksheep-react-round-slider";
 
 
@@ -54,4 +52,4 @@ ComponentSlider.displayName = 'SliderWrapper';
 ComponentSlider.propTypes = {};
 ComponentSlider.defaultProps = {};
 
-export default cssmodules(ComponentSlider, styles);
+export default ComponentSlider; 

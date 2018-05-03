@@ -1,5 +1,4 @@
 import React from 'react';
-import './styles/colorparam.scss';
 import ComponentSlider from "./ComponentSlider";
 import Parameter from "../model/Parameter";
 

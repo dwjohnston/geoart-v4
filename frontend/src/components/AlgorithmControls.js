@@ -1,5 +1,5 @@
 import React from 'react';
-import GenericParameterContainer from "../containers/GenericParameterContainer";
+import GenericParameterContainer from "./GenericParameterContainer";
 
 import Planet from '../model/algoComponents/Planet';
 import LfoPlanet from '../model/algoComponents/LfoPlanet';
@@ -20,7 +20,6 @@ import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import Slider from "blacksheep-react-round-slider";
 import PlanetPreview from './PlanetPreview';
 import 'react-tabs/style/react-tabs.css';
-import "./styles/tabs.scss";
 
 
 class AlgorithmControls extends React.Component {
@@ -163,9 +162,9 @@ class AlgorithmControls extends React.Component {
     for (let param of algoParams) {
 
       console.log(param);
-      let key = [this.props.algorithm.name, param.label, "tab", i++].join("-");
+        let key = [this.props.algorithm.name, param.label, "tab", i++].join("-");
 
-      tabs.push(<Tab className = {"react-tabs__tab " + param.className} key = {key}>
+        tabs.push(<Tab className = {"react-tabs__tab " + param.className} key = {key}>
         {param.constructor === Planet &&
           <PlanetPreview planet = {param}/>
         }

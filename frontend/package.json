@@ -4,16 +4,19 @@
   "private": true,
   "dependencies": {
     "b": "^2.0.1",
-    "blacksheep-react-canvas": "^1.2.10",
+    "blacksheep-react-canvas": "2.0.0",
     "blacksheep-react-carousel": "0.0.1",
     "blacksheep-react-round-slider": "^1.0.1",
     "lodash": "^4.17.10",
     "mathjs": "^4.2.1",
     "node-sass-chokidar": "^1.2.2",
     "npm-run-all": "^4.1.2",
+    "prop-types": "^15.6.1",
     "react": "^16.3.2",
+    "react-color": "^2.14.1",
     "react-dom": "^16.3.2",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "react-tabs": "^2.2.2"
   },
   "scripts": {
     "test": "react-scripts test --env=jsdom",

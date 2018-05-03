@@ -1,4 +1,4 @@
-
+import {floor} from 'lodash'; 
 /****
 
   Stage Phaser
@@ -62,7 +62,7 @@ class StagePhaser{
 
   calcStagesAndSubPhases() {
     this.previousStage = this.stage;
-    this.stage =_.floor(this.basePhaser.getPhase() / this.piLength);
+    this.stage =floor(this.basePhaser.getPhase() / this.piLength);
 
 
     this.previousSubPhase = this.subPhase;

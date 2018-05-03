@@ -10,6 +10,8 @@ import AlgorithmInterface from "./AlgorithmInterface";
 
 import BaseAlgorithm from "./BaseAlgorithm";
 
+import {values} from 'lodash'; 
+
 /***
 
 Separation of concerns.
@@ -63,7 +65,7 @@ class NPlanets extends BaseAlgorithm {
     this.recalcPlanets();
 
 
-    this.clearParams = _.values(this.mParams);
+    this.clearParams = values(this.mParams);
     console.log(this.clearParams);
 
     super.initRenderMap();

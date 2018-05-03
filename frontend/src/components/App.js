@@ -15,15 +15,14 @@ import SimpleCarousel from 'blacksheep-react-carousel';
 import ShareOverlay from "./ShareOverlay";
 import AlgorithmControls from "./AlgorithmControls";
 
-import './styles/slider.scss';
-import './styles/index.scss';
+
 
 
 //import * as _ from 'lodash';  //mark for deletion
 
 //import 'bootstrap/dist/css/bootstrap.min.css';
 
-
+console.log(CanvasLayer);
 
 class AppComponent extends React.Component {
 
@@ -89,11 +88,12 @@ class AppComponent extends React.Component {
     <header>
           <h1>hyperactive.media</h1>
 
-            <FacebookProvider appId="1231592460258402">
+           {/* <FacebookProvider appId="1231592460258402">
               <Share href="https://geoart.hyperactive.media">
                 <button type="button">Share</button>
               </Share>
-            </FacebookProvider>
+    </FacebookProvider>
+  */}
 
         <div>
           <button className ="btn btn-share" onClick = {() => {
@@ -161,7 +161,7 @@ class AppComponent extends React.Component {
         <div className ="main">
           <Canvas id ="test-canvas"
               canvasCore = {this.state.canvasCore}
-              layers = {[new CanvasLayer(backgroundColor = new Color(0,0,0,1), degradeLayer = new Color(0,0,0,0.01)), new CanvasLayer(backgroundColor = new Color(0,0,0,0), degradeLayer = true)]}
+              layers = {[new CanvasLayer(new Color(0,0,0,1),   new Color(0,0,0,0.01)), new CanvasLayer(new Color(0,0,0,0), true)]}
               getJpeg = {(v) => {
                 this.handleGetJpeg(v);
               }}
