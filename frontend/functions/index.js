@@ -1,11 +1,33 @@
 const express = require('express'); 
 
 const functions = require('firebase-functions');
+const admin = require("firebase-admin"); 
+var serviceAccount = require('./service-account.json');
 
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://geoart-v4.firebaseio.com"
+});
+
+console.log(serviceAccount); 
 
 const app = express();
 const path = require('path');
 const fs = require('fs')
+const bodyParser = require("body-parser");
+const shortid = require('shortid');
+const imageDataURI = require('image-data-uri');
+
+
+
+var defaultStorage = admin.storage();
+var bucket = defaultStorage.bucket('images');
+
+
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.json({
+  limit: 500000
+})); // for parsing application/json
 
 
 let basicGet = (request, response, id) => {
@@ -46,13 +68,42 @@ app.get('/:id', (request, response) =>  {
     basicGet(request, response);
   });
 
+
+  app.post("/api/saveimage", (req, res) => {
+    console.log('saveaaaa image"');
+
+    //This here converts the data uri into an image object
+    let image =imageDataURI.decode(req.body.image);
+    let id = shortid.generate();
+  
+    let blob = bucket.file(id + ".png");
+    let blobStream = blob.createWriteStream() ;
+  
+    blobStream.on("error", err=> {
+      //handle error
+      console.log("error");
+    });
+  
+    blobStream.on('finish', () => {
+  
+      console.log("finish");
+      res.status(200).end();
+    });
+  
+  
+    blobStream.end(image.dataBuffer);
+  
+
+
+
+    res.send("aa");
+  });
+
+
 app.use(express.static(path.resolve(__dirname, '../build')));
 
 
-//app.listen(port, () => console.log(`Listening on port ${port}`));
 
-
-// Create and Deploy Your First Cloud Functions
-// https://firebase.google.com/docs/functions/write-firebase-functions
+//exports.expressapp=app; 
 
 exports.app = functions.https.onRequest(app);

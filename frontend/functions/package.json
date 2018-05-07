@@ -5,14 +5,17 @@
     "lint": "eslint .",
     "serve": "firebase serve --only functions",
     "shell": "firebase functions:shell",
-    "start": "npm run shell",
+    "start": "npm run shell --debug",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.3",
     "firebase-admin": "~5.12.0",
-    "firebase-functions": "^1.0.1"
+    "firebase-functions": "^1.0.1",
+    "image-data-uri": "^1.1.0",
+    "shortid": "^2.2.8"
   },
   "devDependencies": {
     "eslint": "^4.12.0",

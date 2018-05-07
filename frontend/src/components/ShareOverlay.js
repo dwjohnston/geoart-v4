@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-//import MetaTags from "react-meta-tags";
-//import {ShareButtons, generateShareIcon} from 'react-share';
-//import FacebookProvider, { Share } from 'react-facebook';
+// import MetaTags from "react-meta-tags";
+// import {ShareButtons, generateShareIcon} from 'react-share';
+// import FacebookProvider, { Share } from 'react-facebook';
 
 // const {
 //   FacebookShareButton,
@@ -38,11 +38,6 @@ shareFb = () => {
 
 
     SHARE OVERLAY
-{/*
-      <MetaTags>
-        {this.props.imageUrl && <meta property = "og:image" content = {this.props.imageUrl}/>  }
-      </MetaTags>
-
       <div className ="share-header">
         <h2> share </h2>
           <button className = "btn btn-large btn-close glyphicon glyphicon-remove" onClick = {this.props.onClose}/>
@@ -52,7 +47,7 @@ shareFb = () => {
 
           <div className ="share-buttons">
 
-            <FacebookProvider appId="1231592460258402">
+            {/* <FacebookProvider appId="1231592460258402">
               <Share href="https://geoart.hyperactive.media">
                 <button type="button">Share</button>
               </Share>
@@ -63,13 +58,16 @@ shareFb = () => {
               <TwitterShareButton url = "https://geoart.hyperactive.media"> <TwitterIcon size ={64} round = {false} />  </TwitterShareButton>
                 {this.props.currentJpeg &&  <a className = "btn btn-save btn-xlarge glyphicon glyphicon-download-alt" href = {this.props.currentJpeg} download = "hello.png"></a> }
 
-              </div>
+            */}
 
+
+                {this.props.currentJpeg &&  <a className = "btn btn-save btn-xlarge glyphicon glyphicon-download-alt" href = {this.props.currentJpeg} download = "hello.png"></a> }
+                </div>
 
               <div className = "share-image-container">
 
                 {this.props.currentJpeg && <img src = {this.props.currentJpeg}/> }
-              </div>*/}
+              </div>
             </div>
 
 

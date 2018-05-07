@@ -1,8 +1,10 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
-
+**/*.log
 frontend/.vscode
 
 frontend/src/**/*.css
+
+frontend/functions/service-account.json
 
 # dependencies
 **/node_modules

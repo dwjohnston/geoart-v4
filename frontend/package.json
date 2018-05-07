@@ -10,7 +10,6 @@
     "lodash": "^4.17.10",
     "mathjs": "^4.2.1",
     "node-sass-chokidar": "^1.2.2",
-    "npm-run-all": "^4.1.2",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-color": "^2.14.1",
@@ -30,7 +29,10 @@
   },
   "proxy": {
     "/": {
-      "target": "http://localhost:3300"
+      "target": "http://localhost:5000/geoart-v4/us-central1/app"
     }
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.3"
   }
 }
