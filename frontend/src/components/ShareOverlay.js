@@ -1,20 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import MetaTags from "react-meta-tags";
-// import {ShareButtons, generateShareIcon} from 'react-share';
-// import FacebookProvider, { Share } from 'react-facebook';
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  FacebookIcon, 
+  TwitterIcon,
 
-// const {
-//   FacebookShareButton,
-//   TwitterShareButton,
-//   RedditShareButton,
-//   TumblrShareButton,
-
-// } = ShareButtons;
-
-// const FacebookIcon = generateShareIcon("facebook");
-// const TwitterIcon = generateShareIcon("twitter");
-
+} from 'react-share';
 
 class ShareOverlay extends React.Component {
 
@@ -29,19 +22,16 @@ class ShareOverlay extends React.Component {
 //   }
 
 
-shareFb = () => {
-
-}
 
   render() {
     return <div className = {"share-overlay " + (this.props.visible ? "visible" : "") }>
 
 
-    SHARE OVERLAY
+    SHARE OVERLAY {this.props.imageUrl}
       <div className ="share-header">
         <h2> share </h2>
-          <button className = "btn btn-large btn-close glyphicon glyphicon-remove" onClick = {this.props.onClose}/>
-            <button className = "btn btn-large " onClick = {this.shareFb}>fb </button>
+          <button className = "btn btn-large btn-close glyphicon glyphicon-remove" onClick = {this.props.onClose}>x</button> 
+            {/* <button className = "btn btn-large " onClick = {this.shareFb}>fb </button> */}
 
           </div>
 
@@ -52,13 +42,13 @@ shareFb = () => {
                 <button type="button">Share</button>
               </Share>
             </FacebookProvider>
+            */}
 
 
-            <FacebookShareButton url = "https://geoart.hyperactive.media"> <FacebookIcon size ={64} round = {false} />  </FacebookShareButton>
-              <TwitterShareButton url = "https://geoart.hyperactive.media"> <TwitterIcon size ={64} round = {false} />  </TwitterShareButton>
+            <FacebookShareButton url = {"https://geoart-v4.firebaseapp.com/"+ this.props.imageUrl}> <FacebookIcon size ={64} round = {false} />  </FacebookShareButton>
+              <TwitterShareButton url = {"https://geoart-v4.firebaseapp.com/"+ this.props.imageUrl}> <TwitterIcon size ={64} round = {false} />  </TwitterShareButton>
                 {this.props.currentJpeg &&  <a className = "btn btn-save btn-xlarge glyphicon glyphicon-download-alt" href = {this.props.currentJpeg} download = "hello.png"></a> }
 
-            */}
 
 
                 {this.props.currentJpeg &&  <a className = "btn btn-save btn-xlarge glyphicon glyphicon-download-alt" href = {this.props.currentJpeg} download = "hello.png"></a> }
