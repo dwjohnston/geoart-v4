@@ -82,7 +82,11 @@ app.get('/:id', (request, response) =>  {
     blobStream.on('finish', () => {
   
       console.log("finish");
-      res.status(200).send(id);
+
+      blob.makePublic().then(() => {
+        res.send(id);
+      });
+
     });
   
   

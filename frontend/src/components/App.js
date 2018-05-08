@@ -78,6 +78,36 @@ class AppComponent extends React.Component {
   handleGetJpeg(v) {
 
     this.setState({currentJpeg: v});
+
+
+    fetch("/api/saveimage", {
+      method: "POST",
+      headers: {
+'Content-Type': 'application/json'
+},
+      body: JSON.stringify({
+          image: v
+      }),
+
+    }).then(res => {
+
+        if (!res.ok){
+          throw Error(res.statusText);
+        }
+
+        return res.text()
+      }
+    )
+    .then((text) => {
+
+      console.log(text);
+      this.setState({imageUrl: text});
+      this.setState({showShareDialog: true});
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    ;
   }
 
 
@@ -88,13 +118,6 @@ class AppComponent extends React.Component {
     <header>
          <h1>hyperactive.media</h1>
 
-           {/* <FacebookProvider appId="1231592460258402">
-              <Share href="https://geoart.hyperactive.media">
-                <button type="button">Share</button>
-              </Share>
-    </FacebookProvider>
-  */}
-
        <div>
           <button className ="btn btn-share" onClick = {() => {
 
@@ -104,35 +127,6 @@ class AppComponent extends React.Component {
               this.setState({canvasCore: core});
 
 
-              console.log(this.state.currentJpeg);
-              fetch("/api/saveimage", {
-                method: "POST",
-                headers: {
-    'Content-Type': 'application/json'
-  },
-                body: JSON.stringify({
-                    image: this.state.currentJpeg
-                }),
-
-              }).then(res => {
-
-                  if (!res.ok){
-                    throw Error(res.statusText);
-                  }
-
-                  return res.text()
-                }
-              )
-              .then((text) => {
-
-                console.log(text);
-                this.setState({imageUrl: text});
-                this.setState({showShareDialog: true});
-              })
-              .catch((err) => {
-                console.log(err);
-              })
-              ;
 
           }}><span className ="glyphicon glyphicon-share-alt"/> <span>  share your creation</span></button>
         </div>
