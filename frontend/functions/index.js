@@ -42,6 +42,7 @@ let indexGet = (request, response, id) => {
 
     if (id) {
       result = data.replace(/\$OG_IMAGE/g, "https://storage.googleapis.com/geoart-v4-images/"+ id + ".png"); 
+      result = result.replace(/\$OG_URL/g, "https://geoart-v4.firebaseapp.com/"+ id); 
     }
 
     //response.set('Cache-Control', 'public, max-age=600, s-maxage=1200'); 
@@ -84,6 +85,8 @@ app.get('/:id', (request, response) =>  {
       console.log("finish");
 
       blob.makePublic().then(() => {
+
+        console.log("make public"); 
         res.send(id);
       });
 
