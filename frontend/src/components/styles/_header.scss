@@ -2,7 +2,12 @@ header {
 
 
   h1 {
-    font-size: 2rem;
+    font-size: 1rem;
+
+    @include tablet-landscape-and-up {
+      font-size: 2rem;
+    }
+
   }
   padding: 0.25em;
   padding-bottom: 0;

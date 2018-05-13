@@ -55,7 +55,9 @@
 
     flex: 1 0 auto;
     position:relative;
+    border: solid 2px white; 
     img {
+      border: solid 2px red; 
       max-width: 100%;
       max-height: 100%;
       position: absolute;

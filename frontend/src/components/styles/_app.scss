@@ -1,6 +1,8 @@
 
 
-
+header {
+  flex: 0 0 2rem; 
+}
 
 .index, .main {
   background-color: $color-panel-grey;
@@ -22,24 +24,37 @@
 
   .canvas-container {
     flex: 1 0 auto;
-    margin: 0.8em;
-    box-sizing: border-box;
+    margin: 0.5em;
+   // box-sizing: border-box;
     position: relative;
 
-    //flex: 0 1 calc(100vw - 1.6em);
-    @include landscape{
-      flex: 0 1 calc(100vh - 1.6em);
+
+    &>div {
+
+      height: calc(100vh - 24rem); 
+      width: calc(100vh - 24rem); 
+      margin-left: auto;
+      margin-right: auto;
+
+      canvas {
+        border: solid 1px $color-border-grey;
+        box-sizing: border-box;
+      }
+  
     }
 
-    canvas {
-      border: solid 1px $color-border-grey;
-      box-sizing: border-box;
+
+
     }
-  }
+
+    //flex: 0 1 calc(100vw - 1.6em);
+
+
+  
 
 
   .controls {
-    flex: 0 0 19em;
+    flex: 0 0 19rem;
 
     @include landscape {
       flex: 1 0 40em;

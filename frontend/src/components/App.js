@@ -153,13 +153,16 @@ class AppComponent extends React.Component {
 
 
         <div className ="main">
-          <Canvas id ="test-canvas"
-              canvasCore = {this.state.canvasCore}
-              layers = {[new CanvasLayer(new Color(0,0,0,1),   new Color(0,0,0,0.01)), new CanvasLayer(new Color(0,0,0,0), true)]}
-              getJpeg = {(v) => {
-                this.handleGetJpeg(v);
-              }}
-              />
+
+          <div className = "canvas-container square-box"> 
+            <Canvas id ="test-canvas"
+                canvasCore = {this.state.canvasCore}
+                layers = {[new CanvasLayer(new Color(0,0,0,1),   new Color(0,0,0,0.01)), new CanvasLayer(new Color(0,0,0,0), true)]}
+                getJpeg = {(v) => {
+                  this.handleGetJpeg(v);
+                }}
+                />
+          </div> 
           <div className ="controls">
 
             <SimpleCarousel
