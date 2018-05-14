@@ -157,7 +157,7 @@ class AppComponent extends React.Component {
           <div className = "canvas-container square-box"> 
             <Canvas id ="test-canvas"
                 canvasCore = {this.state.canvasCore}
-                layers = {[new CanvasLayer(new Color(0,0,0,1),   new Color(0,0,0,0.01)), new CanvasLayer(new Color(0,0,0,0), true)]}
+                layers = {[new CanvasLayer(this.state.algorithm.baseColor), new CanvasLayer(this.state.algorithm.baseColor)]}
                 getJpeg = {(v) => {
                   this.handleGetJpeg(v);
                 }}

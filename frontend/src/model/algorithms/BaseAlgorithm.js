@@ -3,7 +3,7 @@ import AlgorithmInterface from "./AlgorithmInterface";
 
 import Parameter from "../Parameter";
 import ParameterContainer from "../ParameterContainer";
-
+import {Color} from 'blacksheep-react-canvas';
 
 import {ClearAll} from "blacksheep-react-canvas";
 
@@ -15,7 +15,17 @@ class BaseAlgorithm extends AlgorithmInterface {
 
     this.globalSpeed = new Parameter(1,50, 1, 1, "super-speed");
     this.baseSpeed = new Parameter(1, 8, 1, 6, "base-speed");
-    this.settingsPanel = new ParameterContainer([this.globalSpeed, this.baseSpeed], "", "glyphicon glyphicon-cog");
+    this.baseColor = new Color(0, 0, 0, 1); 
+    this.baseColor.hasChanged = false; 
+    this.baseColor.getHasChanged = function(){
+      console.log("ghs");
+      console.log(this); 
+      let hc = this.hasChanged;
+      this.hasChanged = false; 
+      return hc;
+    };
+
+    this.settingsPanel = new ParameterContainer([this.globalSpeed, this.baseSpeed, this.baseColor], "", "glyphicon glyphicon-cog");
 
 
     this.planets = [];
@@ -61,8 +71,10 @@ class BaseAlgorithm extends AlgorithmInterface {
     let hasChanged = false;
 
     this.clearParams.forEach((v)=> {
+      console.log(v); 
       hasChanged = hasChanged ||  v.getHasChanged();
     });
+
 
     return hasChanged;
   }
@@ -75,7 +87,8 @@ class BaseAlgorithm extends AlgorithmInterface {
   }
 
   initPaintClearFunction() {
-    this.clearParams = this.planets;
+    this.clearParams = [].concat(this.planets).concat([this.baseColor]);
+    
   }
 
   /***
@@ -94,7 +107,7 @@ class BaseAlgorithm extends AlgorithmInterface {
       if (this.requiresClear) {
 
         this.requiresClear = false;
-        return new ClearAll(true);
+        return new ClearAll(this.baseColor);
 
       }
     }])
