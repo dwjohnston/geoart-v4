@@ -18,6 +18,9 @@ const bodyParser = require("body-parser");
 const shortid = require('shortid');
 const imageDataURI = require('image-data-uri');
 
+const DEFAULT_WIDTH  = 500; 
+const DEFAULT_HEIGHT = 500; 
+
 
 
 var defaultStorage = admin.storage();
@@ -40,14 +43,28 @@ let indexGet = (request, response, id) => {
       return console.log(err);
     }
 
-    if (id) {
-      result = data.replace(/\$OG_IMAGE/g, "https://storage.googleapis.com/geoart-v4-images/"+ id + ".png"); 
-      result = result.replace(/\$OG_URL/g, "https://geoart-v4.firebaseapp.com/"+ id); 
-    }
 
-    //response.set('Cache-Control', 'public, max-age=600, s-maxage=1200'); 
-    response.set('Cache-Control', 'no-cache'); 
-    response.send(result);
+    let file = bucket.file(id + ".png");
+    file.getMetadata((err, metadata, apiResponse) => {
+      let result = data.replace(/\$OG_IMAGE/g, "https://storage.googleapis.com/geoart-v4-images/"+ id + ".png"); 
+      result = result.replace(/\$OG_URL/g, "https://geoart-v4.firebaseapp.com/"+ id); 
+      
+      
+      if (metadata) {
+        console.log("metadata");
+        console.log(metadata.metadata); 
+        result = result.replace(/\$OG_WIDTH/g, metadata.metadata.width || DEFAULT_WIDTH);
+        result = result.replace(/\$OG_HEIGHT/g, metadata.metadata.height || DEFAULT_HEIGHT);
+      }
+
+
+
+
+      //response.set('Cache-Control', 'public, max-age=600, s-maxage=1200'); 
+      response.set('Cache-Control', 'no-cache'); 
+      response.send(result);
+    }); 
+
 });
 
 };
@@ -73,27 +90,43 @@ app.get('/:id', (request, response) =>  {
     let id = shortid.generate();
   
     let blob = bucket.file(id + ".png");
-    let blobStream = blob.createWriteStream() ;
-  
-    blobStream.on("error", err=> {
-      //handle error
-      console.log("error");
-    });
-  
-    blobStream.on('finish', () => {
-  
-      console.log("finish");
 
-      blob.makePublic().then(() => {
 
-        console.log("make public"); 
-        res.send(id);
+      let blobStream = blob.createWriteStream() ;
+  
+      blobStream.on("error", err=> {
+        //handle error
+        console.log("error");
       });
+    
+      blobStream.on('finish', () => {
+    
+        console.log("finish");
+  
+        blob.makePublic().then(() => {
+  
+          console.log("make public"); 
 
-    });
+
+          blob.setMetadata({metadata: {
+            width: req.body.width, 
+            height: req.body.height, 
+          }}, (err, apiResponse) =>  {
+
+
+            console.log(apiResponse); 
+            res.send(id);
+
+          }); 
+      
+        });
   
-  
-    blobStream.end(image.dataBuffer);
+      });
+    
+    
+      blobStream.end(image.dataBuffer);
+
+
 
   });
 

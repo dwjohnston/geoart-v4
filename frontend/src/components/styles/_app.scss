@@ -29,19 +29,32 @@ header {
     position: relative;
 
 
-    &>div {
+      .Canvas {
+        height: calc(100vh - 24rem); 
+        width: calc(100vh - 24rem);
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
 
-      height: calc(100vh - 24rem); 
-      width: calc(100vh - 24rem); 
-      margin-left: auto;
-      margin-right: auto;
+        max-width: 500px; 
+        max-height: 500px; 
+
+      }
 
       canvas {
         border: solid 1px $color-border-grey;
         box-sizing: border-box;
+
+        max-width: 500px; 
+        max-height: 500px; 
+
+        height: calc(100vh - 24rem); 
+        width: calc(100vh - 24rem); 
+
+        position:absolute; 
       }
   
-    }
+    
 
 
 

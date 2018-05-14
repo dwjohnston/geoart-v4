@@ -85,9 +85,7 @@ class AppComponent extends React.Component {
       headers: {
 'Content-Type': 'application/json'
 },
-      body: JSON.stringify({
-          image: v
-      }),
+      body: JSON.stringify(v),
 
     }).then(res => {
 
