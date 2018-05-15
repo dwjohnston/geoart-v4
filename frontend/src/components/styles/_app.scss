@@ -30,18 +30,16 @@ header {
 
 
       .Canvas {
-        height: calc(100vh - 24rem); 
-        width: calc(100vh - 24rem);
         position: relative;
-        margin-left: auto;
-        margin-right: auto;
-
-        max-width: 500px; 
-        max-height: 500px; 
-
+        margin-left: auto; 
+        margin-right: auto; 
       }
 
       canvas {
+        position:absolute; 
+      }
+
+      .Canvas, canvas {
         border: solid 1px $color-border-grey;
         box-sizing: border-box;
 
@@ -51,8 +49,15 @@ header {
         height: calc(100vh - 24rem); 
         width: calc(100vh - 24rem); 
 
-        position:absolute; 
+        @include landscape {
+
+          height: calc(100vw - 30rem); 
+          width: calc(100vw - 30rem); 
+
+        }
       }
+
+
   
     
 
@@ -70,7 +75,7 @@ header {
     flex: 0 0 19rem;
 
     @include landscape {
-      flex: 1 0 40em;
+      flex: 0 0 30em;
     }
   }
 }
