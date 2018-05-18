@@ -77,8 +77,13 @@ class AppComponent extends React.Component {
 
   handleGetJpeg(v) {
 
-    this.setState({currentJpeg: v});
+    this.setState({
+      currentJpeg: v.image,
+      showShareDialog: true
+    });
 
+
+    console.log(v); 
 
     fetch("/api/saveimage", {
       method: "POST",
@@ -100,7 +105,6 @@ class AppComponent extends React.Component {
 
       console.log(text);
       this.setState({imageUrl: text});
-      this.setState({showShareDialog: true});
     })
     .catch((err) => {
       console.log(err);
@@ -118,13 +122,9 @@ class AppComponent extends React.Component {
 
        <div>
           <button className ="btn btn-share" onClick = {() => {
-
-
               let core = this.state.canvasCore;
               core.requestJpeg();
               this.setState({canvasCore: core});
-
-
 
           }}><span className ="glyphicon glyphicon-share-alt"/> <span>  share your creation</span></button>
         </div>
@@ -142,7 +142,13 @@ class AppComponent extends React.Component {
           currentJpeg = {this.state.currentJpeg}
           imageUrl = {this.state.imageUrl}
           onClose = {() => {
-          this.setState({showShareDialog: false});
+
+          this.setState({
+            showShareDialog: false, 
+            currentJpeg: false, 
+            imageUrl: false, 
+          
+          });
 
 
         }}/>
@@ -152,7 +158,7 @@ class AppComponent extends React.Component {
 
         <div className ="main">
 
-          <div className = "canvas-container square-box"> 
+          <div className = "canvas-container"> 
             <Canvas id ="test-canvas"
                 canvasCore = {this.state.canvasCore}
                 layers = {[new CanvasLayer(this.state.algorithm.baseColor), new CanvasLayer(this.state.algorithm.baseColor)]}
@@ -172,15 +178,9 @@ class AppComponent extends React.Component {
                 core.setDrawingSource(v);
                 core.setRequiresClear();
                 this.setState({canvasCore: core});
-
-
                 this.setState({algorithm: v});
-
               })}/>
-
-
             <AlgorithmControls algorithm={this.state.algorithm}  changeTrigger={this.state.changeTrigger}/>
-
             </div>
 
           </div>

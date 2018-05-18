@@ -19,11 +19,8 @@ class PlanetPreview extends React.Component {
   }
 
   render() {
-
-      console.log(this.state.color); 
-
     return (
-      <div className="planet-preview" style = {{border: 'solid 2px ' + this.state.color.shift(50,0.5).toString()}} >
+      <div className="planet-preview" style = {{"border-color":  this.state.color.shift(50,0.5).toString()}} >
       </div>
     );
   }

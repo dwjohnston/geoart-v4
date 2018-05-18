@@ -11,47 +11,28 @@ import {
 
 class ShareOverlay extends React.Component {
 
-
-//   shareFb = () => {
-//     FB.ui({
-//   method: 'feed',
-//   link: 'http://geoart.hyperactive.media',
-//   caption: 'An example caption',
-//   source: "https://s3-ap-southeast-2.amazonaws.com/dj-test-bucket/HJxXlO6BG.png"
-// }, function(response){});
-//   }
-
-
-
   render() {
-    return <div className = {"share-overlay " + (this.props.visible ? "visible" : "") }>
+    return <div className = {`share-overlay ${this.props.visible ? 'visible' : ''} ${this.props.imageUrl? 'image-ready' : ''}`}>
 
 
     SHARE OVERLAY {this.props.imageUrl}
       <div className ="share-header">
         <h2> share </h2>
-          <button className = "btn btn-large btn-close glyphicon glyphicon-remove" onClick = {this.props.onClose}>x</button> 
-            {/* <button className = "btn btn-large " onClick = {this.shareFb}>fb </button> */}
+          <button className = "btn btn-large btn-close glyphicon glyphicon-remove" onClick = {this.props.onClose}>
+            <i className="fas fa-times"></i>
+          </button> 
+      </div>
 
-          </div>
-
-          <div className ="share-buttons">
-
-            {/* <FacebookProvider appId="1231592460258402">
-              <Share href="https://geoart.hyperactive.media">
-                <button type="button">Share</button>
-              </Share>
-            </FacebookProvider>
-            */}
-
+      <div className ="share-buttons">
 
             <FacebookShareButton url = {"https://geoart-v4.firebaseapp.com/"+ this.props.imageUrl}> <FacebookIcon size ={64} round = {false} />  </FacebookShareButton>
               <TwitterShareButton url = {"https://geoart-v4.firebaseapp.com/"+ this.props.imageUrl}> <TwitterIcon size ={64} round = {false} />  </TwitterShareButton>
-                {this.props.currentJpeg &&  <a className = "btn btn-save btn-xlarge glyphicon glyphicon-download-alt" href = {this.props.currentJpeg} download = "hello.png"></a> }
+                {this.props.currentJpeg &&  
+                <a className = "btn btn-save btn-xlarge glyphicon glyphicon-download-alt" href = {this.props.currentJpeg} download = "hello.png">
+                  <i className="fas fa-download"></i>
+                </a> 
+                }
 
-
-
-                {this.props.currentJpeg &&  <a className = "btn btn-save btn-xlarge glyphicon glyphicon-download-alt" href = {this.props.currentJpeg} download = "hello.png"></a> }
                 </div>
 
               <div className = "share-image-container">

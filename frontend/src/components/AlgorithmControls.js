@@ -44,23 +44,16 @@ class AlgorithmControls extends React.Component {
 
     return <GenericParameterContainer param={param} key={  param.id }
       onChange = {(v) => {
-
-       console.log("param change");
        param.hasChanged = true;
      }}
       />
   }
 
   renderColor(color,id) {
-
     color.id =    [id, "color"].join("-");
 
-
     return <GenericParameterContainer param = {color} key = {color.id}
-
       onChange = {(v) => {
-
-       console.log("color change");
        color.hasChanged = true;
      }} />;
   }
@@ -71,7 +64,6 @@ class AlgorithmControls extends React.Component {
 
     return <GenericParameterContainer param = {param} key = {param.id} onChange = {(v) => {
 
-      console.log("lfo change");
       param.hasChanged = true;
     }}/>
 
@@ -115,12 +107,9 @@ class AlgorithmControls extends React.Component {
 
   //**MARKED FOR DELETION**/
   regenParams() {
-
     let params = [];
     let algoParams = this.props.algorithm.params;
 
-
-    console.log('regenParams');
     let i = 0;
     for (let key in algoParams) {
 
@@ -138,11 +127,7 @@ class AlgorithmControls extends React.Component {
     this.setState({params: params});
   }
 
-
   componentWillMount() {
-    //this.renderTabs();
-    //this.renderTabPanels();
-
     this.setState({value: 0.6});
   }
 
@@ -158,16 +143,14 @@ class AlgorithmControls extends React.Component {
     let i = 0;
 
 
-    console.log(this.props.algorithm);
     for (let param of algoParams) {
 
-      console.log(param);
         let key = [this.props.algorithm.name, param.label, "tab", i++].join("-");
 
-        tabs.push(<Tab className = {"react-tabs__tab " + param.className} key = {key}>
+        tabs.push(<Tab className = {"react-tabs__tab "} key = {key}>
          {param.constructor === Planet &&
-          <PlanetPreview planet = {param}/>
-        } <span/> 
+          <PlanetPreview planet = {param}/> || <span>  <i className = {param.tabClassName}/>  </span> 
+        } 
       </Tab>);
     }
     return tabs;
@@ -177,15 +160,12 @@ class AlgorithmControls extends React.Component {
   renderTabPanels() {
     let panels = [];
     let algoParams = this.props.algorithm.getParams();
-
     let i = 0;
+
     for (let param of algoParams) {
-
       let key = [this.props.algorithm.name, param.label, "tab-panel", i++].join("-");
-
       panels.push(<TabPanel key = {key}>{this.genericRender(param)}</TabPanel>);
     }
-
 
     return panels;
   }
@@ -194,18 +174,11 @@ class AlgorithmControls extends React.Component {
 
     return (
       <div className="algorithmcontrols-component">
-
         <Tabs>
           <TabList>
-
             {this.renderTabs()}
-
-
           </TabList>
-
           {this.renderTabPanels()}
-
-
         </Tabs>
       </div>
     );

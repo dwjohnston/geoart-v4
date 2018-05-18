@@ -19,6 +19,18 @@
     align-items: stretch;
   }
 
+  &.image-ready {
+    .SocialMediaShareButton{
+      cursor: pointer; 
+      opacity: 1; 
+    }
+  }
+
+
+  .SocialMediaShareButton{
+    cursor: not-allowed; 
+    opacity: 0.1; 
+  }
 
 
 
@@ -45,10 +57,7 @@
 
     }
 
-    a {
-      width: 64px;
-      height: 64px;
-    }
+
   }
 
   .share-image-container {

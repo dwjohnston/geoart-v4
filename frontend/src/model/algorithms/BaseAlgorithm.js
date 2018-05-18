@@ -18,14 +18,12 @@ class BaseAlgorithm extends AlgorithmInterface {
     this.baseColor = new Color(0, 0, 0, 1); 
     this.baseColor.hasChanged = false; 
     this.baseColor.getHasChanged = function(){
-      console.log("ghs");
-      console.log(this); 
       let hc = this.hasChanged;
       this.hasChanged = false; 
       return hc;
     };
 
-    this.settingsPanel = new ParameterContainer([this.globalSpeed, this.baseSpeed, this.baseColor], "", "glyphicon glyphicon-cog");
+    this.settingsPanel = new ParameterContainer([this.globalSpeed, this.baseSpeed, this.baseColor], "", "fas fa-wrench");
 
 
     this.planets = [];
@@ -71,7 +69,6 @@ class BaseAlgorithm extends AlgorithmInterface {
     let hasChanged = false;
 
     this.clearParams.forEach((v)=> {
-      console.log(v); 
       hasChanged = hasChanged ||  v.getHasChanged();
     });
 

@@ -9,6 +9,7 @@ class ParameterContainer {
   constructor(params = [], label="", className = "") {
     this.params = params;
     this.label =label;
+    this.tabClassName = className; 
 
     this.className = className;
   }
