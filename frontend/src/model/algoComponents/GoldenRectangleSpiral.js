@@ -13,14 +13,15 @@ import {Circle, Position, Color, Line, pointOnCircle, foo} from 'blacksheep-reac
 
 
 class GoldenRectangleSpiral extends Planet{
-	constructor(speed, distance, color, center, label) {
+	constructor(speed, distance, color, center, label,  baseSpeed) {
 
 
 		//speed, distance, color, center, label, phase =0
-		super(speed, distance, color, center, label);
+		super(speed, distance, color, center, label,  baseSpeed);
 
 
-		this.stagePhaser = new StagePhaser(4, new BasePhaser(this.speed));
+		console.log(this.baseSpeed); 
+		this.stagePhaser = new StagePhaser(4, new BasePhaser(this.speed, 0, this.baseSpeed));
 
 		this.goldenRectanglePositioner = new GoldenRectanglePositioner(this.speed, this.distance, this.center, this.stagePhaser);
 		this.goldenSpiralPositioner = new GoldenSpiralPositioner(this.goldenRectanglePositioner);

@@ -14,7 +14,7 @@ import {Circle, Polygon,  Position, Color, Line, GeoUtil,AbstractPolygon, Nested
 class FunkyGeoPlanet extends Planet {
 	constructor(
 		boundry,
-		speed = 0.001,
+		speed = 2,
 		color = new Color(255,255, 255, 0.1),
 		label = "funky geo planet",
 		nSides= new Parameter(3, 10, 1, 4, "nSides"),
@@ -24,7 +24,7 @@ class FunkyGeoPlanet extends Planet {
 
 		super(speed, boundry.distance.getValue(), color, boundry.center, label);
 
-		this.speed = new Parameter(0.001, 0.05, 0.001, speed, "speed");
+		this.speed = new Parameter(1, 10, 1, speed, "speed");
 
 		this.nSides = 	 nSides;
 		this.boundry = boundry;

@@ -4,7 +4,7 @@ import {Circle, Position, Color, Line} from 'blacksheep-react-canvas';
 
 
 class Planet {
-	constructor(speed, distance, color, center, label,baseSpeed = new Parameter(1, 1, 0, 1, "base-speed"), phase =0 ) {
+	constructor(speed, distance, color, center, label,baseSpeed = new Parameter(1, 1, 1, 1, "base-speed"), phase =0 ) {
 
 		//min, max, step, init, label
 		this.baseSpeed = baseSpeed;

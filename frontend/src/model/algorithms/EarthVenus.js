@@ -18,8 +18,9 @@ class EarthVenus extends BaseAlgorithm {
 
     this.planets = [
 
-      new Planet(0.01625, 0.2, new Color(255, 255, 255, 0.4), new Position(0.5, 0.5), "venus"),
-      new Planet(0.01, 0.3, new Color(255, 255, 255, 0.4), new Position(0.5, 0.5), "earth"),
+      //It should actually be 16.25
+      new Planet(13, 0.2, new Color(255, 255, 255, 0.4), new Position(0.5, 0.5), "venus"),
+      new Planet(8, 0.3, new Color(255, 255, 255, 0.4), new Position(0.5, 0.5), "earth"),
     ]
 
     this.name = "original-earth-venus";

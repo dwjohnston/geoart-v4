@@ -15,9 +15,11 @@ class GoldenRectangle extends BaseAlgorithm {
   constructor(onChangeCallback) {
     super(onChangeCallback);
 
+    this.baseSpeed.value = 1; 
+
     this.planets = [
 
-      new GoldenRectangleSpiral(0.01625, 0.0025, new Color(255, 255, 255, 0.4), new Position(0.5, 0.5), "golden-rectangle"),
+      new GoldenRectangleSpiral(24, 0.0025, new Color(255, 255, 255, 0.4), new Position(0.5, 0.5), "golden-rectangle",  this.baseSpeed),
 
     ]
 

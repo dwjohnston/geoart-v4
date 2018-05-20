@@ -22,8 +22,8 @@ class GeoPlanets extends BaseAlgorithm {
     super(onChangeCallback);
 
     this.planets = [
-      new GeoPlanet(0.005, 0.3, new Color(255, 0, 0, 0.2), new Position(0.5, 0.5), "p1", 3, 0.003),
-      new GeoPlanet(0.002, 0.5, new Color(0, 255, 0, 0.3), new Position(0.5, 0.5), "p2", 5,0.004)
+      new GeoPlanet(10, 0.3, new Color(255, 0, 0, 0.2), new Position(0.5, 0.5), "p1", 3, 0.003),
+      new GeoPlanet(5, 0.5, new Color(0, 255, 0, 0.3), new Position(0.5, 0.5), "p2", 5,0.004)
     ]
 
     this.tickables = this.planets;

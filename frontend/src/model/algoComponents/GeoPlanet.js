@@ -11,7 +11,7 @@ class GeoPlanet extends Planet{
 
 		super(speed, distance, color, center, label);
 
-		this.speed = new Parameter(0.001, 0.05, 0.001, speed, "speed");
+		this.speed = new Parameter(1, 10, 1, speed, "speed");
 		this.nSides = 	 new Parameter(3, 10, 1, nSides, "num sides");
 
 		this.rotateSpeed = new Parameter(-0.005, 0.005, 0.0001, rotateSpeed, "rotate speed");

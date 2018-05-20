@@ -1,6 +1,5 @@
 import Parameter from "../../../Parameter";
 
-
 /***
 
   Base Phaser
@@ -11,9 +10,10 @@ import Parameter from "../../../Parameter";
 class BasePhaser {
 
 
-  constructor(speedParam, initPhase = 0){
+  constructor(speedParam, initPhase = 0, baseSpeed = new Parameter(1, 25, 1, 6, "base-speed")){
 
-		this.speed = speedParam;
+    this.speed = speedParam;
+    this.baseSpeed = baseSpeed; 
     this.initPhase = initPhase;
 
     this.reset();
@@ -29,8 +29,11 @@ class BasePhaser {
   tick() {
 
     this.previousPhase = this.phase;
-    this.phase +=  (this.speed.getValue() * Math.PI) ;
-    this.phase = this.phase % (2*Math.PI);
+    console.log(this.baseSpeed); 
+    let realSpeed = this.speed.getValue() / this.baseSpeed.getValue();
+    console.log(realSpeed); 
+    this.phase +=  ((realSpeed/1000) * Math.PI) ;
+		this.phase = this.phase % (2*Math.PI);
 
   }
 

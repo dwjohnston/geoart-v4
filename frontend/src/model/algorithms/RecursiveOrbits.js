@@ -26,7 +26,7 @@ class RecursiveOrbits  extends BaseAlgorithm{
     //    constructor(speed, distance, color, centre, label) {
 
     let center = new Position (0.5, 0.5);
-    this.p1 = new Planet(0.005, 0, new Color(250,250,50,0.4), center, "base");
+    this.p1 = new Planet(1, 0, new Color(250,250,50,0.4), center, "base");
 
 
     this.recursionLevel = new Parameter(1, 5, 1, 2, "recursion level");
@@ -85,6 +85,7 @@ class RecursiveOrbits  extends BaseAlgorithm{
             parentPlanet.color,
             parentPlanet.position,
             ["p", depth, i].join("-"),
+            this.baseSpeed,
             (i / this.planetsPerLevel.getValue()) * (Math.PI * 2)
           );
 
