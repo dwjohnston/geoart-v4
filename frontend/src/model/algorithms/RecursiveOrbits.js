@@ -21,9 +21,6 @@ class RecursiveOrbits  extends BaseAlgorithm{
   constructor(onChangeCallback) {
 
     super(onChangeCallback);
-    //min, max, step, init, label, lfoRange, lfoMinFreq, lfoMaxFreq, lfoFreqInit, lfoAmountInit phase=0
-
-    //    constructor(speed, distance, color, centre, label) {
 
     let center = new Position (0.5, 0.5);
     this.p1 = new Planet(1, 0, new Color(250,250,50,0.4), center, "base");
@@ -36,7 +33,7 @@ class RecursiveOrbits  extends BaseAlgorithm{
 
 
     this.mParams = [
-      new ParameterContainer([this.p1.speed, this.p1.color], "base"),
+      new ParameterContainer([this.p1.speed, this.p1.color], "base", this.p1),
       new ParameterContainer([this.recursionLevel, this.planetsPerLevel], "recursion"),
       new ParameterContainer([this.distanceFactor, this.speedFactor], "relationships")
     ];

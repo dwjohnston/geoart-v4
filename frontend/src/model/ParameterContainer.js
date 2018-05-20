@@ -6,12 +6,12 @@
 class ParameterContainer {
 
 
-  constructor(params = [], label="", className = "") {
+  constructor(params = [], label="", previewObject = "") {
     this.params = params;
     this.label =label;
-    this.tabClassName = className; 
 
-    this.className = className;
+    this.previewObject = previewObject; 
+
   }
 
 

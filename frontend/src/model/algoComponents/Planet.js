@@ -40,8 +40,6 @@ class Planet {
 
 	init() {
 
-		console.log("planet init");
-
 		this.calcPosition();
 		this.calcPosition();
 
@@ -122,8 +120,6 @@ class Planet {
 
 	getPreview() {
 		return new Circle(this.radius*4, this.color.shift(50,0.5), this.position, false, 2);
-
-		//return new Line(this.previousPosition, this.position, this.color, 1);
 	}
 
 	getOrbitPreview() {

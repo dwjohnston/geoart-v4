@@ -58,11 +58,7 @@ class NPlanets extends BaseAlgorithm {
     this.tickables = this.planets;
 
     this.recalcPlanets();
-
-
     this.clearParams = values(this.mParams);
-    console.log(this.clearParams);
-
     super.initRenderMap();
   }
 
@@ -134,7 +130,7 @@ class NPlanets extends BaseAlgorithm {
 
     getParams() {
       let p =  super.getParams().concat([
-        new ParameterContainer ([this.mParams.initialPlanet, this.mParams.baseLinkRate], "base"),
+        new ParameterContainer ([this.mParams.initialPlanet, this.mParams.baseLinkRate], "base", this.mParams.initialPlanet),
 
         new ParameterContainer(
           [  this.mParams.nPlanets, this.mParams.rFactorDistance,  this.mParams.rFactorLinkDepth, this.mParams.rFactorSpeed, this.mParams.rFactorOpacity],

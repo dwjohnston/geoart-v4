@@ -3,24 +3,11 @@ import React from 'react';
 
 class PlanetPreview extends React.Component {
 
-  constructor() {
-    super();
-  }
-
-
-  componentWillMount() {
-
-
-    this.setState( {
-      color: this.props.planet.color
-    });
-
-
-  }
-
   render() {
     return (
-      <div className="planet-preview" style = {{"border-color":  this.state.color.shift(50,0.5).toString()}} >
+      <div 
+        className="planet-preview" 
+        style = {{"borderColor":  this.props.planet.color.shift(50,0).toString()}} >
       </div>
     );
   }

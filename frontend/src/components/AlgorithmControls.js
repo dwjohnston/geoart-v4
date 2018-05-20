@@ -15,8 +15,8 @@ import ParameterContainer from '../model/ParameterContainer';
 
 import LfoParam from '../model/LfoParam';
 
-import {Color} from 'blacksheep-react-canvas';
-import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
+import { Color } from 'blacksheep-react-canvas';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Slider from "blacksheep-react-round-slider";
 import PlanetPreview from './PlanetPreview';
 import 'react-tabs/style/react-tabs.css';
@@ -25,47 +25,50 @@ import 'react-tabs/style/react-tabs.css';
 class AlgorithmControls extends React.Component {
 
 
-  renderPlanet(planet,id) {
+  renderPlanet(planet, id) {
 
     let container = [];
 
     id = [id, "planet", planet.label].join("-");
     for (let planetParam of planet.getParams()) {
-      container.push(this.genericRender(planetParam, id ));
+      container.push(this.genericRender(planetParam, id));
     }
 
 
-    return <div className ="controls-container">{container}</div>
+    return <div className="controls-container">{container}</div>
   }
 
-  renderParameter(param,id) {
+  renderParameter(param, id) {
 
     param.id = [id, "param", param.label].join("-");
 
-    return <GenericParameterContainer param={param} key={  param.id }
-      onChange = {(v) => {
-       param.hasChanged = true;
-     }}
-      />
+    return <GenericParameterContainer param={param} key={param.id}
+      onChange={(v) => {
+        param.hasChanged = true;
+      }}
+    />
   }
 
-  renderColor(color,id) {
-    color.id =    [id, "color"].join("-");
+  renderColor(color, id) {
+    color.id = [id, "color"].join("-");
 
-    return <GenericParameterContainer param = {color} key = {color.id}
-      onChange = {(v) => {
-       color.hasChanged = true;
-     }} />;
+    return <GenericParameterContainer param={color} key={color.id}
+      onChange={(v) => {
+        color.hasChanged = true;
+      }} />;
   }
 
-  renderLfoParam(param, id){
+  renderLfoParam(param, id) {
 
     param.id = [id, "lfoparam"].join("-");
 
-    return <GenericParameterContainer param = {param} key = {param.id} onChange = {(v) => {
-
-      param.hasChanged = true;
-    }}/>
+    return <GenericParameterContainer 
+      param={param} 
+      key={param.id} 
+      onChange={(v) => {
+        param.hasChanged = true;
+      }}
+     />;
 
   }
 
@@ -75,11 +78,11 @@ class AlgorithmControls extends React.Component {
 
     id = [id, "paramcontainer", param.label].join("-");
     for (let childParam of param.params) {
-      container.push(this.genericRender(childParam, id ));
+      container.push(this.genericRender(childParam, id));
     }
 
 
-    return <div className ="controls-container" key = {id}>{container} </div>
+    return <div className="controls-container" key={id}>{container} </div>
 
   }
 
@@ -87,21 +90,21 @@ class AlgorithmControls extends React.Component {
     return <div> render error: {id} {param.label}</div>
   }
 
-  genericRender(param,id) {
+  genericRender(param, id) {
 
-    switch(param.constructor) {
-      case Planet:              return this.renderPlanet(param,id);
-      case LfoPlanet:           return this.renderPlanet(param, id);
-      case GeoPlanet:           return this.renderPlanet(param, id);
-      case FunkyGeoPlanet:      return this.renderPlanet(param, id);
+    switch (param.constructor) {
+      case Planet: return this.renderPlanet(param, id);
+      case LfoPlanet: return this.renderPlanet(param, id);
+      case GeoPlanet: return this.renderPlanet(param, id);
+      case FunkyGeoPlanet: return this.renderPlanet(param, id);
       case GoldenRectangleSpiral: return this.renderPlanet(param, id);
 
-      case Parameter:           return this.renderParameter(param,id);
-      case Color:               return this.renderColor(param,id);
-      case LfoParam:            return this.renderLfoParam(param,id);
-      case ParameterContainer:  return this.renderParameterContainer(param, id);
+      case Parameter: return this.renderParameter(param, id);
+      case Color: return this.renderColor(param, id);
+      case LfoParam: return this.renderLfoParam(param, id);
+      case ParameterContainer: return this.renderParameterContainer(param, id);
 
-      default:                  return this.renderError(param, id);
+      default: return this.renderError(param, id);
     }
   }
 
@@ -117,23 +120,25 @@ class AlgorithmControls extends React.Component {
 
         let param = algoParams[key];
 
-        params.push(this.genericRender(param, [this.props.algorithm.name, i++].join("-") ));
+        params.push(this.genericRender(param, [this.props.algorithm.name, i++].join("-")));
 
 
       }
 
     }
 
-    this.setState({params: params});
+    this.setState({ params: params });
   }
 
   componentWillMount() {
-    this.setState({value: 0.6});
+    this.setState({ value: 0.6 });
   }
 
   componentDidUpdate() {
 
   }
+
+
 
 
   renderTabs() {
@@ -143,14 +148,26 @@ class AlgorithmControls extends React.Component {
     let i = 0;
 
 
+
+    function renderPreview(param, key) {
+
+      console.log(param); 
+      switch (param.constructor) {
+        case Planet: return <PlanetPreview planet={param} key ={key} />;
+        case GeoPlanet: return <PlanetPreview planet={param} key ={key}/>;
+        case FunkyGeoPlanet: return <PlanetPreview planet={param} key ={key}/>;
+        case ParameterContainer: return renderPreview(param.previewObject, key); 
+        default: return <i className={param.tabClassName || "fas fa-question"} key ={key}/>;
+      }
+    }
+
+
     for (let param of algoParams) {
 
-        let key = [this.props.algorithm.name, param.label, "tab", i++].join("-");
+      let key = [this.props.algorithm.name, param.label, "tab", i++].join("-");
 
-        tabs.push(<Tab className = {"react-tabs__tab "} key = {key}>
-         {param.constructor === Planet &&
-          <PlanetPreview planet = {param}/> || <span>  <i className = {param.tabClassName}/>  </span> 
-        } 
+      tabs.push(<Tab className={"react-tabs__tab "} key={key}>
+        {renderPreview(param, key)}
       </Tab>);
     }
     return tabs;
@@ -164,7 +181,7 @@ class AlgorithmControls extends React.Component {
 
     for (let param of algoParams) {
       let key = [this.props.algorithm.name, param.label, "tab-panel", i++].join("-");
-      panels.push(<TabPanel key = {key}>{this.genericRender(param)}</TabPanel>);
+      panels.push(<TabPanel key={key}>{this.genericRender(param)}</TabPanel>);
     }
 
     return panels;

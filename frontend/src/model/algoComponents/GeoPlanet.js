@@ -73,9 +73,6 @@ class GeoPlanet extends Planet{
 
 	getOrbitPreview() {
 		let circle =super.getOrbitPreview();
-
-
-
 		//  constructor(nsides=3, size=1, phase=0, position = new Position(0,0)) {
 		let polygon = new Polygon(new AbstractPolygon(this.nSides.getValue(),this.distance.getValue(), this.rotatePhase, this.center),  this.color, false);
 
