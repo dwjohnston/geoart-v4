@@ -55,6 +55,12 @@ class RecursiveOrbits  extends BaseAlgorithm{
 
     this.recalcPlanets();
 
+    //super.initPaintClearFunction();
+    this.settingsPanel.params = [this.globalSpeed, this.baseColor]; 
+    this.clearParams = [this.p1, this.baseColor].concat(this.mParams); 
+    super.initRenderMap();
+
+
 
   }
 
