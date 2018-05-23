@@ -9,11 +9,15 @@ import {
 
 } from 'react-share';
 
+import ProgressBar from "./ProgressBar"; 
+
 class ShareOverlay extends React.Component {
 
   render() {
     return <div className = {`share-overlay ${this.props.visible ? 'visible' : ''} ${this.props.imageUrl? 'image-ready' : ''}`}>
 
+
+    <ProgressBar progress = {this.props.progress}/> 
 
     SHARE OVERLAY {this.props.imageUrl}
       <div className ="share-header">

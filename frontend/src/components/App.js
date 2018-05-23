@@ -37,6 +37,7 @@ class AppComponent extends React.Component {
 
     this.state = {
       showShareDialog: false,
+      uploadProgress: 0, 
     }
   }
 
@@ -108,17 +109,21 @@ class AppComponent extends React.Component {
         let md = {
           contentType: 'image/jpeg',
         };
-       let upload = ref.putString(v,'data_url', md);
+       let upload = ref.putString(v.image,'data_url', md);
 
 
        upload.then(s => {
         console.log(s); 
-        this.setState({ imageUrl: id });
+        this.setState({ imageUrl: id, 
+          uploadProgress: 1, 
+        });
        }); 
 
 
-       upload.on(firebase.storage.TaskEvent.STATE_CHANGED, e =>{
-         console.log("running", e); 
+       upload.on(firebase.storage.TaskEvent.STATE_CHANGED, snapshot=>{
+         this.setState({
+           uploadProgress: snapshot.bytesTransferred / snapshot.totalBytes
+         })
        })
 
     }).catch(e =>  {
@@ -166,7 +171,9 @@ class AppComponent extends React.Component {
             <button className="btn btn-share" onClick={() => {
               let core = this.state.canvasCore;
               core.requestJpeg();
-              this.setState({ canvasCore: core });
+              this.setState({
+                uploadProgress: 0, 
+              });
             }}><span className="glyphicon glyphicon-share-alt" /> <span>  share your creation</span></button>
           </div>
         </header>
@@ -175,6 +182,7 @@ class AppComponent extends React.Component {
           visible={this.state.showShareDialog}
           currentJpeg={this.state.currentJpeg}
           imageUrl={this.state.imageUrl}
+          progress = {this.state.uploadProgress}
           onClose={() => {
             this.setState({
               showShareDialog: false,
