@@ -87,11 +87,10 @@ class AppComponent extends React.Component {
 
     let ref = fireApp.storage().ref();
 
-    console.log(fireApp);
-
+    let id; 
     async function getUnusedId() {
 
-      let id = shortid.generate(); 
+      id = shortid.generate(); 
       let file = ref.child((id + ".png")); 
       console.log(file); 
       
@@ -104,7 +103,6 @@ class AppComponent extends React.Component {
       }
 
     }
-    console.log(v); 
     getUnusedId().then(ref =>{
 
         let md = {
@@ -115,21 +113,13 @@ class AppComponent extends React.Component {
 
        upload.then(s => {
         console.log(s); 
+        this.setState({ imageUrl: id });
        }); 
 
 
        upload.on(firebase.storage.TaskEvent.STATE_CHANGED, e =>{
          console.log("running", e); 
        })
-
-      //  upload.on ("SUCCESS", e => {
-      //    console.log("success", e); 
-      //  })
-
-      //  upload.on("ERROR", e => {
-      //    console.log("error", e); 
-      //  })
-
 
     }).catch(e =>  {
       console.log(e);  
