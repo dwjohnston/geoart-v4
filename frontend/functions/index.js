@@ -1,5 +1,4 @@
 const express = require('express'); 
-
 const functions = require('firebase-functions');
 const admin = require("firebase-admin"); 
 var serviceAccount = require('./service-account.json');
@@ -9,7 +8,16 @@ admin.initializeApp({
   databaseURL: "https://geoart-v4.firebaseio.com"
 });
 
-console.log(serviceAccount); 
+
+var defaultStorage = admin.storage();
+var bucket = defaultStorage.bucket('geoart-v4.appspot.com');
+
+
+//const firebase = "firebase"; 
+//const config = require( "../src/store/api-key"; 
+    
+//const fireApp = firebase.initializeApp(config);
+
 
 const app = express();
 const path = require('path');
@@ -24,8 +32,7 @@ const DEFAULT_HEIGHT = 500;
 const progress = require('progress-stream');
 
 
-var defaultStorage = admin.storage();
-var bucket = defaultStorage.bucket('geoart-v4-images');
+
 
 
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
@@ -47,23 +54,28 @@ let indexGet = (request, response, id) => {
 
     let file = bucket.file(id + ".png");
     file.getMetadata((err, metadata, apiResponse) => {
-      let result = data.replace(/\$OG_IMAGE/g, "https://storage.googleapis.com/geoart-v4-images/"+ id + ".png"); 
-      result = result.replace(/\$OG_URL/g, "https://geoart-v4.firebaseapp.com/"+ id); 
-      
-      
-      if (metadata) {
-        console.log("metadata");
-        console.log(metadata.metadata); 
-        result = result.replace(/\$OG_WIDTH/g, metadata.metadata.width || DEFAULT_WIDTH);
-        result = result.replace(/\$OG_HEIGHT/g, metadata.metadata.height || DEFAULT_HEIGHT);
-      }
+
+      file.makePublic().then((a) => {
+        let result = data.replace(/\$OG_IMAGE/g, "https://storage.googleapis.com/geoart-v4.appspot.com/"+id+".png"); 
+        result = result.replace(/\$OG_URL/g, "https://geoart-v4.firebaseapp.com/"+ id); 
+        
+        
+        if (metadata) {
+          console.log("metadata");
+          console.log(metadata.metadata); 
+          result = result.replace(/\$OG_WIDTH/g, metadata.metadata.width || DEFAULT_WIDTH);
+          result = result.replace(/\$OG_HEIGHT/g, metadata.metadata.height || DEFAULT_HEIGHT);
+        }
+        //response.set('Cache-Control', 'public, max-age=600, s-maxage=1200'); 
+        response.set('Cache-Control', 'no-cache'); 
+        response.send(result);
+  
+      }); 
 
 
 
 
-      //response.set('Cache-Control', 'public, max-age=600, s-maxage=1200'); 
-      response.set('Cache-Control', 'no-cache'); 
-      response.send(result);
+
     }); 
 
 });
@@ -77,7 +89,7 @@ app.get('/:id', (request, response) =>  {
   });
 
   app.get('/', (request, response) =>  {
-    indexGet (request, response, "000");
+    indexGet (request, response, "S1oh1J7k7");
   });
 
 

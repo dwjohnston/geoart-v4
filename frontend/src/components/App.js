@@ -1,6 +1,5 @@
 import React from 'react';
 import { Canvas, CanvasCore, Circle, Color, Position, CanvasLayer } from 'blacksheep-react-canvas';
-//import FacebookProvider, { Share } from 'react-facebook';
 import Parameter from '../model/Parameter';
 import ThreePlanets from "../model/algorithms/ThreePlanets";
 import GeoPlanets from "../model/algorithms/GeoPlanets";
@@ -15,29 +14,19 @@ import SimpleCarousel from 'blacksheep-react-carousel';
 import ShareOverlay from "./ShareOverlay";
 import AlgorithmControls from "./AlgorithmControls";
 
-import fireApp from "../store/google-store"; 
+import fireApp from "../store/google-store";
 import firebase from 'firebase';
 
-import shortid from "shortid"; 
-
-
-//import * as _ from 'lodash';  //mark for deletion
-
-//import 'bootstrap/dist/css/bootstrap.min.css';
-
-console.log(CanvasLayer);
+import shortid from "shortid";
 
 class AppComponent extends React.Component {
 
 
   constructor() {
     super();
-    //
-
-
-    this.state = {
+      this.state = {
       showShareDialog: false,
-      uploadProgress: 0, 
+      uploadProgress: 0,
     }
   }
 
@@ -88,75 +77,59 @@ class AppComponent extends React.Component {
 
     let ref = fireApp.storage().ref();
 
-    let id; 
+    let id;
     async function getUnusedId() {
 
-      id = shortid.generate(); 
-      let file = ref.child((id + ".png")); 
-      console.log(file); 
-      
+      id = shortid.generate();
+      let file = ref.child((id + ".png"));
+      console.log(file);
+
       try {
-        let md =  await file.getMetadata();
-        return getUnusedId(); 
+        let md = await file.getMetadata();
+        return getUnusedId();
       }
-      catch(e) {
-        return file; 
+      catch (e) {
+        return file;
       }
 
     }
-    getUnusedId().then(ref =>{
+    getUnusedId().then(ref => {
 
-        let md = {
-          contentType: 'image/jpeg',
-        };
-       let upload = ref.putString(v.image,'data_url', md);
+      let metadata = {
+        contentType: 'image/png',
+
+        foo: "bar", 
+      };
+      let upload = ref.putString(v.image, 'data_url', metadata);
 
 
-       upload.then(s => {
-        console.log(s); 
-        this.setState({ imageUrl: id, 
-          uploadProgress: 1, 
+      upload.then(s => {
+
+        console.log(s);
+        console.log(s.ref.getDownloadURL()); 
+        ref.updateMetadata( {
+          customMetadata: {
+            width: v.width, 
+            height: v.height, 
+          }
+        }).then (d => {
+          this.setState({
+            imageUrl: id,
+            uploadProgress: 1,
+          });
         });
-       }); 
+      });
 
 
-       upload.on(firebase.storage.TaskEvent.STATE_CHANGED, snapshot=>{
-         this.setState({
-           uploadProgress: snapshot.bytesTransferred / snapshot.totalBytes
-         })
-       })
+      upload.on(firebase.storage.TaskEvent.STATE_CHANGED, snapshot => {
+        this.setState({
+          uploadProgress: snapshot.bytesTransferred / snapshot.totalBytes
+        })
+      })
 
-    }).catch(e =>  {
-      console.log(e);  
-    }); 
-
-
-
-    // fetch("/api/saveimage", {
-    //   method: "POST",
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(v),
-
-    // }).then(res => {
-
-    //   if (!res.ok) {
-    //     throw Error(res.statusText);
-    //   }
-
-    //   return res.text()
-    // }
-    // )
-    //   .then((text) => {
-
-    //     console.log(text);
-    //     this.setState({ imageUrl: text });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   })
-    //   ;
+    }).catch(e => {
+      console.log(e);
+    });
   }
 
 
@@ -172,7 +145,7 @@ class AppComponent extends React.Component {
               let core = this.state.canvasCore;
               core.requestJpeg();
               this.setState({
-                uploadProgress: 0, 
+                uploadProgress: 0,
               });
             }}><span className="glyphicon glyphicon-share-alt" /> <span>  share your creation</span></button>
           </div>
@@ -182,7 +155,7 @@ class AppComponent extends React.Component {
           visible={this.state.showShareDialog}
           currentJpeg={this.state.currentJpeg}
           imageUrl={this.state.imageUrl}
-          progress = {this.state.uploadProgress}
+          progress={this.state.uploadProgress}
           onClose={() => {
             this.setState({
               showShareDialog: false,
@@ -215,8 +188,8 @@ class AppComponent extends React.Component {
                 this.setState({ canvasCore: core });
                 this.setState({ algorithm: v });
               })} />
-            <AlgorithmControls 
-              algorithm={this.state.algorithm} 
+            <AlgorithmControls
+              algorithm={this.state.algorithm}
               changeTrigger={this.state.changeTrigger} />
           </div>
         </div>

@@ -151,7 +151,6 @@ class AlgorithmControls extends React.Component {
 
     function renderPreview(param, key) {
 
-      console.log(param); 
       switch (param.constructor) {
         case Planet: return <PlanetPreview planet={param} key ={key} />;
         case GeoPlanet: return <PlanetPreview planet={param} key ={key}/>;
