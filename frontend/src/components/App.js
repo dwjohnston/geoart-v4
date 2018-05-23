@@ -15,7 +15,10 @@ import SimpleCarousel from 'blacksheep-react-carousel';
 import ShareOverlay from "./ShareOverlay";
 import AlgorithmControls from "./AlgorithmControls";
 
+import fireApp from "../store/google-store"; 
+import firebase from 'firebase';
 
+import shortid from "shortid"; 
 
 
 //import * as _ from 'lodash';  //mark for deletion
@@ -82,34 +85,83 @@ class AppComponent extends React.Component {
       showShareDialog: true
     });
 
+    let ref = fireApp.storage().ref();
 
-    console.log(v);
+    console.log(fireApp);
 
-    fetch("/api/saveimage", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(v),
+    async function getUnusedId() {
 
-    }).then(res => {
-
-      if (!res.ok) {
-        throw Error(res.statusText);
+      let id = shortid.generate(); 
+      let file = ref.child((id + ".png")); 
+      console.log(file); 
+      
+      try {
+        let md =  await file.getMetadata();
+        return getUnusedId(); 
+      }
+      catch(e) {
+        return file; 
       }
 
-      return res.text()
     }
-    )
-      .then((text) => {
+    console.log(v); 
+    getUnusedId().then(ref =>{
 
-        console.log(text);
-        this.setState({ imageUrl: text });
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      ;
+        let md = {
+          contentType: 'image/jpeg',
+        };
+       let upload = ref.putString(v,'data_url', md);
+
+
+       upload.then(s => {
+        console.log(s); 
+       }); 
+
+
+       upload.on(firebase.storage.TaskEvent.STATE_CHANGED, e =>{
+         console.log("running", e); 
+       })
+
+      //  upload.on ("SUCCESS", e => {
+      //    console.log("success", e); 
+      //  })
+
+      //  upload.on("ERROR", e => {
+      //    console.log("error", e); 
+      //  })
+
+
+    }).catch(e =>  {
+      console.log(e);  
+    }); 
+
+
+
+    // fetch("/api/saveimage", {
+    //   method: "POST",
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(v),
+
+    // }).then(res => {
+
+    //   if (!res.ok) {
+    //     throw Error(res.statusText);
+    //   }
+
+    //   return res.text()
+    // }
+    // )
+    //   .then((text) => {
+
+    //     console.log(text);
+    //     this.setState({ imageUrl: text });
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   })
+    //   ;
   }
 
 

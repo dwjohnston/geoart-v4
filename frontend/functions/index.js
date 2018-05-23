@@ -21,6 +21,7 @@ const imageDataURI = require('image-data-uri');
 const DEFAULT_WIDTH  = 500; 
 const DEFAULT_HEIGHT = 500; 
 
+const progress = require('progress-stream');
 
 
 var defaultStorage = admin.storage();
@@ -85,15 +86,50 @@ app.get('/:id', (request, response) =>  {
 
     console.log('saveaaaa image"');
 
+
+
     //This here converts the data uri into an image object
     let image =imageDataURI.decode(req.body.image);
     let id = shortid.generate();
   
+    //console.log(image); 
+
+    console.log(image.dataBuffer.length); 
+    //console.log(image.dataBuffer.toString());
+    // let stat = fs.statSync(image.dataBuffer.toString());
+    // var str = progress({
+    //     length: stat.size,
+    //     time: 100 /* ms */
+    // });
+
+    // console.log("aa");
+    // str.on('progress', (p) => {
+    //   console.log("progress", p); 
+    // });
+
     let blob = bucket.file(id + ".png");
 
 
       let blobStream = blob.createWriteStream() ;
+
+      let str = progress({
+        size: image.dataBuffer.length, 
+        time: 100, 
+      }); 
+
+
+      blob.createReadStream().pipe(str).pipe(blobStream);
+
+
+      //blobStream.pipe(str)
+
+
+    str.on('progress', (p) => {
+      console.log("progress", p); 
+    });
   
+      //console.log(blobStream);
+
       blobStream.on("error", err=> {
         //handle error
         console.log("error");

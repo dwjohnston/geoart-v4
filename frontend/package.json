@@ -7,6 +7,7 @@
     "blacksheep-react-canvas": "2.0.0",
     "blacksheep-react-carousel": "0.0.1",
     "blacksheep-react-round-slider": "^1.0.1",
+    "firebase": "^5.0.3",
     "lodash": "^4.17.10",
     "mathjs": "^4.2.1",
     "node-sass-chokidar": "^1.2.2",
@@ -16,7 +17,8 @@
     "react-dom": "^16.3.2",
     "react-scripts": "1.1.4",
     "react-share": "^2.1.1",
-    "react-tabs": "^2.2.2"
+    "react-tabs": "^2.2.2",
+    "shortid": "^2.2.8"
   },
   "scripts": {
     "test": "react-scripts test --env=jsdom",
