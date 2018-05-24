@@ -55,7 +55,6 @@ let indexGet = (request, response, id) => {
     let file = bucket.file(id + ".png");
     file.getMetadata((err, metadata, apiResponse) => {
 
-      file.makePublic().then((a) => {
         let result = data.replace(/\$OG_IMAGE/g, "https://storage.googleapis.com/geoart-v4.appspot.com/"+id+".png"); 
         result = result.replace(/\$OG_URL/g, "https://geoart-v4.firebaseapp.com/"+ id); 
         
@@ -69,19 +68,17 @@ let indexGet = (request, response, id) => {
         //response.set('Cache-Control', 'public, max-age=600, s-maxage=1200'); 
         response.set('Cache-Control', 'no-cache'); 
         response.send(result);
-  
-      }); 
-
-
-
-
-
     }); 
-
 });
 
 };
 
+app.post("/makepublic", (req, res) =>{
+  let file = bucket.file(req.body.id + ".png");
+  file.makePublic().then((a) => {
+    res.end();
+  }); 
+});
 
 app.get('/:id', (request, response) =>  {
   console.log("foo"); 

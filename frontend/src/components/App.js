@@ -95,29 +95,38 @@ class AppComponent extends React.Component {
     }
     getUnusedId().then(ref => {
 
-      let metadata = {
+      let upload = ref.putString(v.image, 'data_url', {
         contentType: 'image/png',
-
-        foo: "bar", 
-      };
-      let upload = ref.putString(v.image, 'data_url', metadata);
-
+      });
 
       upload.then(s => {
-
-        console.log(s);
-        console.log(s.ref.getDownloadURL()); 
         ref.updateMetadata( {
           customMetadata: {
             width: v.width, 
             height: v.height, 
           }
-        }).then (d => {
-          this.setState({
-            imageUrl: id,
-            uploadProgress: 1,
+        })
+        .then(s => {
+
+          console.log("fetch");
+          fetch("/makepublic", {
+            method: "POST", 
+            body: JSON.stringify({
+              id: id, 
+            }), 
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+          }).then (d => {
+
+            console.log("fetch response");
+            this.setState({
+              imageUrl: id,
+              uploadProgress: 1,
+            });
           });
-        });
+        });        
       });
 
 
