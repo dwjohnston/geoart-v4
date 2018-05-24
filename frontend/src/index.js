@@ -3,10 +3,17 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 
-import "./components/styles/index.css"; 
+import {BrowserRouter, Route} from "react-router-dom";
+
+import "./components/styles/index.css";
 
 
 
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <BrowserRouter >
+        <Route path="/:id?" component={App} />
+    </BrowserRouter>,
+    document.getElementById('root')
+);
 registerServiceWorker();

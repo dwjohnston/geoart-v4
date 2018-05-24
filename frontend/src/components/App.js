@@ -17,6 +17,9 @@ import AlgorithmControls from "./AlgorithmControls";
 import fireApp from "../store/google-store";
 import firebase from 'firebase';
 
+
+import {withRouter} from 'react-router-dom'; 
+
 import shortid from "shortid";
 
 class AppComponent extends React.Component {
@@ -125,6 +128,8 @@ class AppComponent extends React.Component {
               imageUrl: id,
               uploadProgress: 1,
             });
+
+            this.props.history.push("/"+id);
           });
         });        
       });
@@ -143,11 +148,14 @@ class AppComponent extends React.Component {
 
 
   render() {
+
+    console.log(this.props);
     return (
       <div className="index">
 
         <header>
           <h1>hyperactive.media</h1>
+          
 
           <div>
             <button className="btn btn-share" onClick={() => {
@@ -210,4 +218,4 @@ class AppComponent extends React.Component {
 AppComponent.defaultProps = {
 };
 
-export default AppComponent;
+export default withRouter(AppComponent);
