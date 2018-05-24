@@ -1,22 +1,25 @@
 .share-overlay {
 
-  border: solid 2px white;
+  background-color: $color-background-grey-d;
+  border: solid 2px $color-background-grey-c;
   border-radius: 1em;
 
-
+  overflow: hidden;
   position: fixed;
   left: 1em;
   right: 1em;
   top: 1em;
   bottom: 1em;
   display:none;
+  //display: flex !important; //for development
+  flex-flow: column nowrap;
+  align-items: stretch;
 
-  background-color: $color-background-grey;
+
+
   z-index: 2;
   &.visible{
     display: flex;
-    flex-flow: column nowrap;
-    align-items: stretch;
   }
 
   &.image-ready {
@@ -37,8 +40,7 @@
   .share-header {
     display: flex;
     flex-flow: row nowrap;
-    align-items: center;
-
+    justify-content: flex-end;
 
     h2 {
       flex: 1 0 auto;
@@ -50,27 +52,43 @@
     flex-flow: row nowrap;
     padding: 0.5em;
     align-items: stretch;
-
-
     &>* {
       margin-left: 1rem;
-
+      
     }
 
+    a {
+      width: 64px;
+      height: 64px; 
 
+      button {
+        height: 100%; 
+        width: 100%; 
+        font-size: 2em; 
+        border:none;
+      }
+    }
   }
 
   .share-image-container {
 
-    flex: 1 0 auto;
-    position:relative;
-    border: solid 2px white; 
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    align-items: stretch; 
+    margin: 1em;
+
     img {
-      border: solid 2px red; 
-      max-width: 100%;
-      max-height: 100%;
-      position: absolute;
-    }
+     object-fit: contain;
+     max-width: 100%; 
+
+     @include landscape {
+       max-height: 100%; 
+       max-width: auto; 
+     }
+
+   }
+
 
   }
 
@@ -78,9 +96,11 @@
 
 
   .progress-bar {
+
+    margin-top: 0.6em;
     .file-progress-inner {
-      background-color: green; 
-      height: 1em;
+      background-color: #4f4;
+      height: 0.5em;
       width: 0em; 
     }
   }

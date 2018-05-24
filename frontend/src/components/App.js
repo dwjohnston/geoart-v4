@@ -18,7 +18,7 @@ import fireApp from "../store/google-store";
 import firebase from 'firebase';
 
 
-import {withRouter} from 'react-router-dom'; 
+import { withRouter } from 'react-router-dom';
 
 import shortid from "shortid";
 
@@ -27,7 +27,7 @@ class AppComponent extends React.Component {
 
   constructor() {
     super();
-      this.state = {
+    this.state = {
       showShareDialog: false,
       uploadProgress: 0,
     }
@@ -75,74 +75,44 @@ class AppComponent extends React.Component {
 
     this.setState({
       currentJpeg: v.image,
-      showShareDialog: true
+      showShareDialog: true,
+      uploadProgress: 0,
     });
 
-    let ref = fireApp.storage().ref();
+    let id =shortid.generate(); 
+    let ref = fireApp.storage().ref(id + ".png");
 
-    let id;
-    async function getUnusedId() {
-
-      id = shortid.generate();
-      let file = ref.child((id + ".png"));
-      console.log(file);
-
-      try {
-        let md = await file.getMetadata();
-        return getUnusedId();
+    let upload = ref.putString(v.image, 'data_url', {
+      contentType: 'image/png',
+      customMetadata: {
+        width: v.width,
+        height: v.height,
       }
-      catch (e) {
-        return file;
-      }
+    });
 
-    }
-    getUnusedId().then(ref => {
-
-      let upload = ref.putString(v.image, 'data_url', {
-        contentType: 'image/png',
-      });
-
-      upload.then(s => {
-        ref.updateMetadata( {
-          customMetadata: {
-            width: v.width, 
-            height: v.height, 
-          }
-        })
-        .then(s => {
-
-          console.log("fetch");
-          fetch("/makepublic", {
-            method: "POST", 
-            body: JSON.stringify({
-              id: id, 
-            }), 
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-          }).then (d => {
-
-            console.log("fetch response");
-            this.setState({
-              imageUrl: id,
-              uploadProgress: 1,
-            });
-
-            this.props.history.push("/"+id);
-          });
-        });        
-      });
-
-
-      upload.on(firebase.storage.TaskEvent.STATE_CHANGED, snapshot => {
-        this.setState({
-          uploadProgress: snapshot.bytesTransferred / snapshot.totalBytes
-        })
+    upload.then(s => {
+      return fetch("/makepublic", {
+        method: "POST",
+        body: JSON.stringify({
+          id: id,
+        }),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
       })
+    }).then(d => {
+      this.setState({
+        imageUrl: id,
+        uploadProgress: 1,
+      });
+      this.props.history.push("/" + id);
+    });
 
-    }).catch(e => {
-      console.log(e);
+    upload.on(firebase.storage.TaskEvent.STATE_CHANGED, snapshot => {
+      this.setState({
+        uploadProgress: (snapshot.bytesTransferred / snapshot.totalBytes) * 0.9
+      })
     });
   }
 
@@ -155,7 +125,7 @@ class AppComponent extends React.Component {
 
         <header>
           <h1>hyperactive.media</h1>
-          
+
 
           <div>
             <button className="btn btn-share" onClick={() => {
