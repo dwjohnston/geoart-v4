@@ -29,7 +29,7 @@ class GeoPlanet extends Planet{
 	}
 
 	getParams() {
-		return [this.speed, this.distance,this.nSides,this.rotateSpeed, this.color, ];
+		return [this.speed,this.rotateSpeed, this.distance,this.nSides, this.color, ];
 	}
 
 	tick() {

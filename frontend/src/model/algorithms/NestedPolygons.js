@@ -24,7 +24,15 @@ class NestedPolygons extends BaseAlgorithm{
   constructor(onChangeCallback) {
     super(onChangeCallback);
 
-    let basePlanet =   new GeoPlanet(5, 0.5, new Color(255, 0, 0, 0.2), new Position(0.5, 0.5), "p1", 5, 0.003);
+    let basePlanet =   new GeoPlanet(
+      5,
+      0.5,
+      new Color(255, 0, 0, 0.2),
+      new Position(0.5, 0.5),
+      "p1",
+      this.baseSpeed,
+      5,
+      1);
 
     this.planets = [
 

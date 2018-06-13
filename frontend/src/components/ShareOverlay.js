@@ -62,13 +62,13 @@ class ShareOverlay extends React.Component {
         }
 
           
-           <a>  <button class="btn btn-copy"  data-clipboard-text={this.state.url} onClick = {
+           <a>  <button className="btn btn-copy"  data-clipboard-text={this.state.url} onClick = {
               () =>{
                 this.setState({toast: Math.random()})
                 console.log(this.props.history); 
                 console.log(window.location.href); 
               }
-            }> <i class="fas fa-copy"></i></button></a> 
+            }> <i className="fas fa-copy"></i></button></a> 
 
 
 

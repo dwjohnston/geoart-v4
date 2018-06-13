@@ -1,7 +1,8 @@
 import Parameter from '../Parameter';
 
 import Planet from "./Planet";
-import {Circle, Polygon,  Position, Color, Line, GeoUtil,AbstractPolygon, NestedPolygon} from 'blacksheep-react-canvas';
+import { Circle, Polygon, Position, Color, Line, GeoUtil, AbstractPolygon, NestedPolygon } from 'blacksheep-react-canvas';
+import BasePhaser from './modules/phasers/BasePhaser';
 
 
 //Doesn't have a distance
@@ -15,36 +16,63 @@ class FunkyGeoPlanet extends Planet {
 	constructor(
 		boundry,
 		speed = 2,
-		color = new Color(255,255, 255, 0.1),
+		color = new Color(255, 255, 255, 0.1),
 		label = "funky geo planet",
-		nSides= new Parameter(3, 10, 1, 4, "nSides"),
-		initialPhase = 0
+		nSides = new Parameter(3, 10, 1, 4, "nSides"),
+		initialPhase = 0,
+		baseSpeed,
 	) {
 
 
-		super(speed, boundry.distance.getValue(), color, boundry.center, label);
+		super(speed,
+			boundry.distance.getValue(),
+			color,
+			boundry.center,
+			label,
+			boundry.baseSpeed,
+		);
 
-		this.speed = new Parameter(1, 10, 1, speed, "speed");
+		this.baseSpeed = boundry.baseSpeed;
 
-		this.nSides = 	 nSides;
+		this.speed = new Parameter(-10, 10, 1, speed, "speed");
+		this.rotateSpeed = new Parameter(-10, 10, 1, 1, "rotate-speed");
+
+
+		this.nSides = nSides;
 		this.boundry = boundry;
 
-		this.phase = initialPhase;
 
+		this.rotatePhaser = new BasePhaser(
+			this.rotateSpeed,
+			0,
+			this.baseSpeed);
+
+		this.planetPhaser = new BasePhaser(
+			this.speed,
+			0,
+			this.baseSpeed);
 
 	}
 
 	getParams() {
-		return [this.speed, this.color, this.nSides];
+		return [this.speed, this.rotateSpeed, this.nSides, this.color,];
 	}
 
 	tick() {
 
 		super.tick();
+		this.rotatePhaser.tick();
+		this.planetPhaser.tick();
 
 	}
 
-	calcPosition(){
+	reset() {
+		super.reset();
+		this.rotatePhaser.reset();
+		this.planetPhaser.reset();
+	}
+
+	calcPosition() {
 
 
 
@@ -58,9 +86,12 @@ class FunkyGeoPlanet extends Planet {
 
 
 
-			let poly = new NestedPolygon(this.boundry.getCurrentOrbit(), nSides, 0);
+			let poly = new NestedPolygon(
+				this.boundry.getCurrentOrbit(),
+				nSides,
+				this.rotatePhaser.getPhase());
 
-			let position = poly.getPoint(this.phase);
+			let position = poly.getPoint(this.planetPhaser.getPhase());
 
 			this.position.update(
 				position.x, position.y
@@ -82,7 +113,10 @@ class FunkyGeoPlanet extends Planet {
 		//
 		//
 		// let polygon = new Polygon(this.distance.getValue(), this.color, this.center, this.nSides.getValue(), this.rotatePhase, false);
-		let polygon = new Polygon(new NestedPolygon(this.boundry.getCurrentOrbit(), this.nSides.getValue(), 0 ), this.color, false);
+		let polygon = new Polygon(new NestedPolygon(
+			this.boundry.getCurrentOrbit(),
+			this.nSides.getValue(),
+			this.rotatePhaser.getPhase()), this.color, false);
 
 		return [polygon];
 	}

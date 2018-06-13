@@ -31,7 +31,7 @@ class BasePhaser {
     this.previousPhase = this.phase;
     let realSpeed = this.speed.getValue() / this.baseSpeed.getValue();
     this.phase +=  ((realSpeed/1000) * Math.PI) ;
-		this.phase = this.phase % (2*Math.PI);
+		this.phase = (this.phase + 2*Math.PI)   % (2*Math.PI);
 
   }
 

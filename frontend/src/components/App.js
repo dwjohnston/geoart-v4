@@ -130,7 +130,7 @@ class AppComponent extends React.Component {
             this.setState({
               uploadProgress: 0.1,
             });
-          }}><i class="fas fa-share-alt"></i><span> share your creation</span>
+          }}><i className="fas fa-share-alt"></i><span> share your creation</span>
           </button>
 
         </header>

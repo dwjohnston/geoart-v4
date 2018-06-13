@@ -35,7 +35,7 @@ class AlgorithmControls extends React.Component {
     }
 
 
-    return <div className="controls-container">{container}</div>
+    return <div className="controls-container" key = {id}>{container}</div>
   }
 
   renderParameter(param, id) {
