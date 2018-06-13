@@ -2,6 +2,8 @@ import Parameter from '../Parameter';
 
 import {Circle, Position, Color, Line} from 'blacksheep-react-canvas';
 
+import SinePhaser from "./modules/phasers/SinePhaser";
+
 
 class Planet {
 	constructor(speed, distance, color, center, label,baseSpeed = new Parameter(1, 1, 1, 1, "base-speed"), phase =0 ) {
@@ -22,6 +24,11 @@ class Planet {
 		this.initPhase = phase;
 		this.phase = phase;
 		this.radius = 0.003;
+
+
+		this.xPhaser = new SinePhaser(this.speed, this.phase, this.baseSpeed, this.distance); 
+		this.yPhaser = new SinePhaser(this.speed, 0.5*Math.PI, this.baseSpeed, this.distance); 
+
 
 
 
@@ -72,6 +79,10 @@ class Planet {
 		return this.position;
 	}
 
+	getPhase() {
+		return this.xPhaser.getPhaser().getPhase();
+	}
+
 	resetPhase() {
 		this.phase = this.initPhase;
 	}
@@ -88,8 +99,12 @@ class Planet {
 
 		this.previousPosition.update(this.position.x, this.position.y);
 
-		this.position.update(x + (Math.cos(this.phase) * this.distance.getValue()),
-		y +(Math.sin(this.phase) * this.distance.getValue()));
+		// this.position.update(x + (Math.cos(this.phase) * this.distance.getValue()),
+		// y +(Math.sin(this.phase) * this.distance.getValue()));
+		this.position.update(
+			x + this.xPhaser.getValue(),
+			y + this.yPhaser.getValue(),
+		)		;
 
 
 		return this.position;
@@ -100,9 +115,13 @@ class Planet {
 
 	tick(){
 
-		let realSpeed = this.speed.getValue() / this.baseSpeed.getValue();
-		this.phase +=  ((realSpeed/1000) * Math.PI) ;
-		this.phase = this.phase % (2*Math.PI);
+		// let realSpeed = this.speed.getValue() / this.baseSpeed.getValue();
+		// this.phase +=  ((realSpeed/1000) * Math.PI) ;
+		// this.phase = this.phase % (2*Math.PI);
+
+
+		this.xPhaser.tick();
+		this.yPhaser.tick();
 
 
 

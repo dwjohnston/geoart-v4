@@ -79,7 +79,7 @@ class AppComponent extends React.Component {
       uploadProgress: 0,
     });
 
-    let id =shortid.generate(); 
+    let id = shortid.generate();
     let ref = fireApp.storage().ref(id + ".png");
 
     let upload = ref.putString(v.image, 'data_url', {
@@ -111,7 +111,7 @@ class AppComponent extends React.Component {
 
     upload.on(firebase.storage.TaskEvent.STATE_CHANGED, snapshot => {
       this.setState({
-        uploadProgress: (snapshot.bytesTransferred / snapshot.totalBytes) * 0.9
+        uploadProgress: 0.1 + (snapshot.bytesTransferred / snapshot.totalBytes) * 0.8
       })
     });
   }
@@ -124,18 +124,15 @@ class AppComponent extends React.Component {
       <div className="index">
 
         <header>
-          <h1>hyperactive.media</h1>
+          <button className="btn btn-share" onClick={() => {
+            let core = this.state.canvasCore;
+            core.requestJpeg();
+            this.setState({
+              uploadProgress: 0.1,
+            });
+          }}><i class="fas fa-share-alt"></i><span> share your creation</span>
+          </button>
 
-
-          <div>
-            <button className="btn btn-share" onClick={() => {
-              let core = this.state.canvasCore;
-              core.requestJpeg();
-              this.setState({
-                uploadProgress: 0,
-              });
-            }}><span className="glyphicon glyphicon-share-alt" /> <span>  share your creation</span></button>
-          </div>
         </header>
 
         <ShareOverlay

@@ -29,9 +29,7 @@ class BasePhaser {
   tick() {
 
     this.previousPhase = this.phase;
-    console.log(this.baseSpeed); 
     let realSpeed = this.speed.getValue() / this.baseSpeed.getValue();
-    console.log(realSpeed); 
     this.phase +=  ((realSpeed/1000) * Math.PI) ;
 		this.phase = this.phase % (2*Math.PI);
 
