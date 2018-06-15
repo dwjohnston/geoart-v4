@@ -12,13 +12,6 @@ admin.initializeApp({
 var defaultStorage = admin.storage();
 var bucket = defaultStorage.bucket('geoart-v4.appspot.com');
 
-
-//const firebase = "firebase"; 
-//const config = require( "../src/store/api-key"; 
-
-//const fireApp = firebase.initializeApp(config);
-
-
 const app = express();
 const path = require('path');
 const fs = require('fs')
@@ -51,7 +44,7 @@ let indexGet = (request, response, id) => {
     file.getMetadata((err, metadata, apiResponse) => {
 
       let result = data.replace(/\$OG_IMAGE/g, "https://storage.googleapis.com/geoart-v4.appspot.com/" + id + ".png");
-      result = result.replace(/\$OG_URL/g, "https://geoart-v4.firebaseapp.com/" + id);
+      result = result.replace(/\$OG_URL/g, "https://geoplanets.io/" + id);
 
 
       if (metadata) {
@@ -60,8 +53,7 @@ let indexGet = (request, response, id) => {
         result = result.replace(/\$OG_WIDTH/g, metadata.metadata.width || DEFAULT_WIDTH);
         result = result.replace(/\$OG_HEIGHT/g, metadata.metadata.height || DEFAULT_HEIGHT);
       }
-      //response.set('Cache-Control', 'public, max-age=600, s-maxage=1200'); 
-      response.set('Cache-Control', 'no-cache');
+      response.set('Cache-Control', 'public, max-age=3600, s-maxage=3600'); 
       response.send(result);
     });
   });
