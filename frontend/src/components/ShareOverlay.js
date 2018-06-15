@@ -51,12 +51,12 @@ class ShareOverlay extends React.Component {
 
       <div className="share-buttons">
 
-        <FacebookShareButton url={"https://geoart-v4.firebaseapp.com/" + this.props.imageUrl}> <FacebookIcon size={64} round={false} />  </FacebookShareButton>
-        <TwitterShareButton url={"https://geoart-v4.firebaseapp.com/" + this.props.imageUrl}> <TwitterIcon size={64} round={false} />  </TwitterShareButton>
-        <RedditShareButton url={"https://geoart-v4.firebaseapp.com/" + this.props.imageUrl}> <RedditIcon size={64} round={false} />  </RedditShareButton>
+        <FacebookShareButton url={"https://geoplanets.io/" + this.props.imageUrl}> <FacebookIcon size={64} round={false} />  </FacebookShareButton>
+        <TwitterShareButton url={"https://geoplanets.io/" + this.props.imageUrl}> <TwitterIcon size={64} round={false} />  </TwitterShareButton>
+        <RedditShareButton url={"https://geoplanets.io/" + this.props.imageUrl}> <RedditIcon size={64} round={false} />  </RedditShareButton>
 
         {this.props.currentJpeg &&
-          <a className="" href={this.props.currentJpeg} download="hello.png">
+          <a className="" href={this.props.currentJpeg} download={this.props.imageUrl + ".png"}>
             <button class="btn"> <i className="fas fa-download"></i></button>
           </a>
         }
