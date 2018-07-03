@@ -25,6 +25,78 @@ A container of several sliders
 
 }
 
+.slider-wrapper {
+  padding: 0.25em; 
+
+  display: flex; 
+  flex-flow: column nowrap; 
+
+
+  label {
+    margin-top: 0.25em;
+    font-size: 0.55em;
+    font-weight: normal; 
+  }
+
+  .slider {
+    margin: 0 auto; 
+    flex: 1 0 auto; 
+  }
+
+  div.value {
+    margin: 0; 
+    text-align: center; 
+  }
+
+}
+
+.slider {
+  width: 3em;
+  background-color: $color-slider-bg; 
+  position: relative; 
+
+
+  .slider-handles {
+    width: 100%; 
+    position: absolute; 
+    top: 1.5em;
+    bottom: 1.5em;
+  }
+
+  .slider-handle {
+    height: 3em;
+    width: 3em;
+    border-radius: 2em; 
+    position: absolute; 
+    background-color: $color-slider-handle; 
+    z-index: 2; 
+  }
+
+  .slider-rail {
+    width: 100%; 
+    background-color:$color-slider-bg;
+    height: 100%;
+  }
+
+  .slider-tracks {
+    position: absolute; 
+    top: 1.5em;
+    bottom: 1.5em;
+    width: 100%; 
+  }
+
+  .slider-track {
+    position: absolute;
+    
+    left: calc(50% - 0.25em); 
+    width: 0.5em;
+    z-index: 1; 
+    background-color: $color-slider-track;  
+    border-radius: 4; 
+    cursor: pointer; 
+  }
+}
+
 /*
 A wrapper around a slider, with labels
 */

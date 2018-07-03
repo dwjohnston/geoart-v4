@@ -6,7 +6,6 @@
     "b": "^2.0.1",
     "blacksheep-react-canvas": ">=2.0.1",
     "blacksheep-react-carousel": ">=0.0.3",
-    "blacksheep-react-round-slider": "^1.0.1",
     "clipboard": "^2.0.1",
     "firebase": "^5.0.3",
     "lodash": "^4.17.10",
