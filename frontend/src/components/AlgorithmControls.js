@@ -17,7 +17,8 @@ import LfoParam from '../model/LfoParam';
 
 import { Color } from 'blacksheep-react-canvas';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import Slider from "blacksheep-react-round-slider";
+//import Slider from "blacksheep-react-round-slider";
+import Slider from "./slider/slider";
 import PlanetPreview from './PlanetPreview';
 import 'react-tabs/style/react-tabs.css';
 

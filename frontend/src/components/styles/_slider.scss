@@ -27,15 +27,17 @@ A container of several sliders
 
 .slider-wrapper {
   padding: 0.25em; 
+  flex: 0 0 4em;
 
   display: flex; 
   flex-flow: column nowrap; 
 
 
   label {
-    margin-top: 0.25em;
+    margin: 0.25em 0 0.3em; 
     font-size: 0.55em;
     font-weight: normal; 
+    text-align: center; 
   }
 
   .slider {
@@ -44,7 +46,8 @@ A container of several sliders
   }
 
   div.value {
-    margin: 0; 
+    margin: 0;
+    margin-top: 0.25em; 
     text-align: center; 
   }
 
@@ -97,24 +100,3 @@ A container of several sliders
   }
 }
 
-/*
-A wrapper around a slider, with labels
-*/
-
-.round-slider-container {
-
-
-  margin: 0; 
-  .label {
-    font-size: 1rem;
-    margin-top: 0.7rem;
-  }
-
-  .Slider{
-
-    width: 7em;
-    height: 7em;
-    margin: 0.5em;
-  }
-
-}

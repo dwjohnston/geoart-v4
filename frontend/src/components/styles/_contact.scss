@@ -1,0 +1,24 @@
+.contact {
+    padding: 0.5em;
+    display: none;
+    flex-flow: row nowrap; 
+    justify-content: space-between; 
+    align-items: center;
+
+
+    @include landscape {
+        display: flex; 
+    }
+
+
+    img {
+        object-fit: scale-down; 
+
+
+        &.github {
+            width: 3.5em;
+            height: 3.5em;
+        }
+    }
+
+}

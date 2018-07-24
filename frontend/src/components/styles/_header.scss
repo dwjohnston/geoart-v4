@@ -1,8 +1,19 @@
 header {
 
+  .build-num {
+    font-size: 0.8em;
+    color: #777; 
+    margin-left: 2em;
+  }
+
   display: flex; 
   flex-flow: row nowrap; 
-  justify-content: flex-end;
-  align-items: stretch; 
+  justify-content: space-between;
+  align-items: center; 
+
+  button {
+    padding: 0.4em; 
+  }
+
 
 }

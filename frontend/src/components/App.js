@@ -13,6 +13,7 @@ import GoldenRectangle from "../model/algorithms/GoldenRectangle";
 import SimpleCarousel from 'blacksheep-react-carousel';
 import ShareOverlay from "./ShareOverlay";
 import AlgorithmControls from "./AlgorithmControls";
+import Contact from "./Contact"; 
 
 import fireApp from "../store/google-store";
 import firebase from 'firebase';
@@ -124,6 +125,11 @@ class AppComponent extends React.Component {
       <div className="index">
 
         <header>
+
+          <span className = "build-num"> 
+            geoplanets.io v1.01
+          </span> 
+
           <button className="btn btn-share" onClick={() => {
             let core = this.state.canvasCore;
             core.requestJpeg();
@@ -175,6 +181,7 @@ class AppComponent extends React.Component {
             <AlgorithmControls
               algorithm={this.state.algorithm}
               changeTrigger={this.state.changeTrigger} />
+              <Contact/> 
           </div>
         </div>
       </div>
