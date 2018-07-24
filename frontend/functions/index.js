@@ -53,7 +53,9 @@ let indexGet = (request, response, id) => {
         result = result.replace(/\$OG_WIDTH/g, metadata.metadata.width || DEFAULT_WIDTH);
         result = result.replace(/\$OG_HEIGHT/g, metadata.metadata.height || DEFAULT_HEIGHT);
       }
-      response.set('Cache-Control', 'public, max-age=3600, s-maxage=3600'); 
+      response.set('Cache-Control', 'public, no-cache'); 
+
+      console.log("sending");
       response.send(result);
     });
   });

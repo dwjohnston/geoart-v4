@@ -127,7 +127,7 @@ class AppComponent extends React.Component {
         <header>
 
           <span className = "build-num"> 
-            geoplanets.io v1.01
+            geoplanets.io v1.02
           </span> 
 
           <button className="btn btn-share" onClick={() => {

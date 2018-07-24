@@ -1,7 +1,7 @@
 
 
 header {
-  flex: 0 0 2rem; 
+  flex: 0 0 3rem; 
 }
 
 .index, .main {
@@ -30,13 +30,18 @@ header {
 
 
       .Canvas {
-        position: relative;
-        margin-left: auto; 
-        margin-right: auto; 
+        position: absolute;
+        left:0;
+        right:0;
+        top:0;
+        bottom:0; 
       }
 
       canvas {
-        position:absolute; 
+        position: absolute; 
+        top: 0; 
+        bottom: 0; 
+        height: 100%;
       }
 
       .Canvas, canvas {
@@ -46,8 +51,10 @@ header {
         max-width: 500px; 
         max-height: 500px; 
 
-        height: calc(100vh - 24rem); 
-        width: calc(100vh - 24rem); 
+        
+
+        //  height: calc(100vh - 28rem); 
+        //  width: calc(100vh - 28rem); 
 
         @include landscape {
 
@@ -65,10 +72,6 @@ header {
 
     }
 
-    //flex: 0 1 calc(100vw - 1.6em);
-
-
-  
 
 
   .controls {
