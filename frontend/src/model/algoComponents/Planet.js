@@ -44,6 +44,19 @@ class Planet {
 	}
 
 
+	getParams() {
+		return [this.baseSpeed, this.speed, this.distance, this.color]; 
+	}
+
+	randomize() {
+		this.getParams().forEach(p => {
+			console.log(p);
+			p.randomize()
+		}); 
+	}
+	
+
+
 
 	init() {
 

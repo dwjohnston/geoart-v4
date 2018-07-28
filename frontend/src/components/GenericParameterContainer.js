@@ -44,7 +44,7 @@ class GenericParameterContainer extends Component {
     this.props.param.r = v.r;
     this.props.param.g = v.g;
     this.props.param.b = v.b;
-    this.props.param.opacity = v.opacity;
+    this.props.param.opacity = v.a;
 
     this.props.onChange(v);
 

@@ -156,7 +156,7 @@ class AlgorithmControls extends React.Component {
         case Planet: return <PlanetPreview planet={param} key ={key} />;
         case GeoPlanet: return <PlanetPreview planet={param} key ={key}/>;
         case FunkyGeoPlanet: return <PlanetPreview planet={param} key ={key}/>;
-        case ParameterContainer: return renderPreview(param.previewObject, key); 
+        case ParameterContainer:  <i className={param.tabClassName || "fas fa-question"} key ={key}/>; 
         default: return <i className={param.tabClassName || "fas fa-question"} key ={key}/>;
       }
     }

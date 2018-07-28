@@ -64,6 +64,8 @@ A container of several sliders
     position: absolute; 
     top: 1.5em;
     bottom: 1.5em;
+
+
   }
 
   .slider-handle {
@@ -73,6 +75,10 @@ A container of several sliders
     position: absolute; 
     background-color: $color-slider-handle; 
     z-index: 2; 
+
+    &:hover {
+      cursor: grab; 
+    }
   }
 
   .slider-rail {

@@ -4,49 +4,25 @@ import Slider from 'react-compound-slider'
 import { Handle, Track } from "./slider/slider";
 
 /**A basic component containing label, value display etc**/
-class ComponentSlider extends React.Component {
+ const ComponentSlider = ({param, changeEvent}) => {
 
-
-  componentDidUpdate() {
-
-
-
-  }
-
-  changeEvent = (v)  => {
-
-
-    this.setState({v: v});
-    console.log(v);
-    if (this.props.changeEvent) {
-      this.props.changeEvent(v);
-    }
-  }
-
-
-  componentWillMount() {
-    this.setState({ v: this.props.param.value, 
-    initValue: this.props.param.value});
-  }
-
-  render() {
 
     let handles = [1];
     let tracks = [1];
 
     return (<div className="slider-wrapper">
 
-      <label>{this.props.param.label}</label>
+      <label>{param.label}</label>
 
       <Slider
-        domain={[this.props.param.min, this.props.param.max]}
-        step={this.props.param.step}
+        domain={[param.min, param.max]}
+        step={param.step}
         className="slider"
-        values={[this.state.initValue]}
+        values={[param.value]}
         mode={2}
         vertical={true}
         reversed = {true}
-        onChange={this.changeEvent}
+        onChange={changeEvent}
       >
 
         <Slider.Handles>
@@ -58,7 +34,7 @@ class ComponentSlider extends React.Component {
                   <Handle
                     key={handle.id}
                     handle={handle}
-                    domain={[this.state.initValue]}
+                    domain={[param.value]}
                     getHandleProps={getHandleProps}
                   />
                 )
@@ -91,7 +67,7 @@ class ComponentSlider extends React.Component {
 
       </Slider>
       <div className="value">
-          {this.state.v}
+          {param.value}
       </div>
     </div>
 
@@ -99,7 +75,6 @@ class ComponentSlider extends React.Component {
 
     );
   }
-}
 
 ComponentSlider.displayName = 'SliderWrapper';
 ComponentSlider.propTypes = {};

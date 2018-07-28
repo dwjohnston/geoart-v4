@@ -18,10 +18,12 @@ import Contact from "./Contact";
 import fireApp from "../store/google-store";
 import firebase from 'firebase';
 
+import _ from 'lodash'; 
 
 import { withRouter } from 'react-router-dom';
 
 import shortid from "shortid";
+import GlobalControls from './GlobalControls';
 
 class AppComponent extends React.Component {
 
@@ -34,7 +36,7 @@ class AppComponent extends React.Component {
     }
   }
 
-  algorithmHasChanged() {
+  algorithmHasChanged = () =>   {
     /**I very much feel like i'm getting into callback hell here.**/
     this.setState({ changeTrigger: Math.random() });
   }
@@ -47,18 +49,22 @@ class AppComponent extends React.Component {
       new EarthVenus(() => this.algorithmHasChanged()),
       new GeoPlanets(() => this.algorithmHasChanged()),
       new NestedPolygons(() => this.algorithmHasChanged()),
-      new GoldenRectangle(() => this.algorithmHasChanged()),
+      //new GoldenRectangle(() => this.algorithmHasChanged()),
       new NPlanets(() => this.algorithmHasChanged()),
-      new RecursiveOrbits(() => this.algorithmHasChanged()),
+      //new RecursiveOrbits(() => this.algorithmHasChanged()),
     ];
 
     let core = new CanvasCore("#000000", 0.04, 2);
-    core.setDrawingSource(this.algorithms[0]);
+    let firstIndex = _.random(0, this.algorithms.length -1, 0); 
+    let algo = this.algorithms[firstIndex];
 
+    core.setDrawingSource(algo);
+    algo.randomize();
     this.setState({
       canvasCore: core,
-      algorithm: this.algorithms[0]
+      algorithm: algo
     });
+
   }
 
 
@@ -178,6 +184,8 @@ class AppComponent extends React.Component {
                 this.setState({ canvasCore: core });
                 this.setState({ algorithm: v });
               })} />
+
+            <GlobalControls algorithm = {this.state.algorithm} forceChange = {this.algorithmHasChanged}/> 
             <AlgorithmControls
               algorithm={this.state.algorithm}
               changeTrigger={this.state.changeTrigger} />

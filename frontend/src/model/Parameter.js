@@ -1,3 +1,10 @@
+import _ from 'lodash'; 
+
+
+function round(number, increment, offset) {
+  return Math.ceil((number - offset) / increment ) * increment + offset;
+}
+
 class Parameter {
 
   constructor(min, max, step, init, label){
@@ -12,6 +19,11 @@ class Parameter {
 
   getValue(){
     return this.value;
+  }
+
+  randomize() {
+    this.value = round(_.random(this.min, this.max), this.step, 0); 
+    this.hasChanged = true; 
   }
 
 

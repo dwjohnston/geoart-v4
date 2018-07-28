@@ -23,7 +23,7 @@ class BaseAlgorithm extends AlgorithmInterface {
       return hc;
     };
 
-    this.settingsPanel = new ParameterContainer([this.globalSpeed, this.baseSpeed, this.baseColor], "", "fas fa-wrench");
+    this.settingsPanel = new ParameterContainer([this.globalSpeed, this.baseSpeed, this.baseColor], "", null,  "fas fa-wrench");
 
 
     this.planets = [];
@@ -37,6 +37,8 @@ class BaseAlgorithm extends AlgorithmInterface {
 
     this.onChangeCallback = onChangeCallback;
 
+    this.requiresClear = true; 
+
     /**
     Structure should look like this:
 
@@ -48,6 +50,16 @@ class BaseAlgorithm extends AlgorithmInterface {
     //
     // }
     */
+
+  }
+
+
+
+  randomize() {
+
+    [...this.planets, this.settingsPanel].forEach( p => p.randomize()); 
+    this.onChange();
+
 
   }
 
@@ -84,7 +96,7 @@ class BaseAlgorithm extends AlgorithmInterface {
   }
 
   initPaintClearFunction() {
-    this.clearParams = [].concat(this.planets).concat([this.baseColor]);
+    this.clearParams = [].concat(this.planets).concat([this.baseColor, this.baseSpeed]);
     
   }
 

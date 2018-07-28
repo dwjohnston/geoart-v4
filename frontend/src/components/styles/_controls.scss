@@ -8,6 +8,20 @@
     align-items: stretch;
 
 
+    .global-controls {
+
+      display: flex; 
+      flex-flow: row nowrap; 
+      justify-content: center; 
+
+      button {
+        width: 4em; 
+        height: 3em; 
+        margin: 0.25em; 
+      }
+    }
+
+
     .algorithmcontrols-component {
 
       flex: 1 0 auto;
@@ -32,6 +46,10 @@
         right:0;
         top:0;
         bottom:0;
+
+        &>* {
+          max-height: 13em;
+        }
 
         >.controls-container  {
           position: static;

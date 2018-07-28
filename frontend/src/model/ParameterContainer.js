@@ -6,12 +6,22 @@
 class ParameterContainer {
 
 
-  constructor(params = [], label="", previewObject = "") {
+  constructor(params = [], label="", previewObject = "", tabClassName = null) {
     this.params = params;
     this.label =label;
 
     this.previewObject = previewObject; 
+    this.tabClassName =tabClassName; 
 
+  }
+
+
+  getParams() {
+    return this.params;
+  }
+
+  randomize() {
+    this.params.forEach(p => p.randomize());
   }
 
 

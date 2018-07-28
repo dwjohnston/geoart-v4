@@ -3,22 +3,11 @@ import ComponentSlider from "./ComponentSlider";
 import Parameter from "../model/Parameter";
 
 import {Color} from 'blacksheep-react-canvas';
-
-import {HuePicker, AlphaPicker} from 'react-color';
-
+import {RgbaPicker} from "react-rgba-color-picker";
 class ComponentColorPicker extends React.Component {
 
-  handleChange(color, e){
-    //
-    console.log(color);
-    console.log(e);
-    let newColor = new Color (color.rgb.r, color.rgb.g, color.rgb.b, color.rgb.a);
-    newColor.id = "color";
-    this.setState({color:newColor});
-
-    if (this.props.changeEvent){
-      this.props.changeEvent(newColor);
-    }
+  handleChange  = (color) => {
+      this.props.changeEvent(color);
   }
 
 
@@ -28,33 +17,11 @@ class ComponentColorPicker extends React.Component {
 
   componentWillMount() {
 
-    this.setState({
-      color: this.props.color
-    });
   }
 
   render() {
     return (
-      <div className="colorparam-component" >
-
-        <HuePicker
-          color = {this.state.color}
-          onChangeComplete = {this.handleChange.bind(this)}
-          direction = "vertical"
-          width = "60px"
-          height = "130px"
-          />
-
-          <AlphaPicker
-            color = {this.state.color}
-            onChangeComplete = {this.handleChange.bind(this)}
-            direction = "vertical"
-            width = "60px"
-            height = "130px"
-            />
-
-
-          </div>
+        <RgbaPicker color={this.props.color} onChange={this.handleChange} />
         );
       }
     }
