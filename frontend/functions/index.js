@@ -53,7 +53,7 @@ let indexGet = (request, response, id) => {
         result = result.replace(/\$OG_WIDTH/g, metadata.metadata.width || DEFAULT_WIDTH);
         result = result.replace(/\$OG_HEIGHT/g, metadata.metadata.height || DEFAULT_HEIGHT);
       }
-      response.set('Cache-Control', 'public, no-cache'); 
+      // response.set('Cache-Control', 'public, no-cache'); 
 
       console.log("sending");
       response.send(result);
@@ -75,6 +75,7 @@ app.get('/:id', (request, response) => {
 });
 
 app.get('/', (request, response) => {
+
   indexGet(request, response, "S1oh1J7k7");
 });
 

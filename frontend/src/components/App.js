@@ -160,8 +160,6 @@ class AppComponent extends React.Component {
             });
           }} />
 
-        <div className="main">
-
           <div className="canvas-container">
             <Canvas id="test-canvas"
               canvasCore={this.state.canvasCore}
@@ -171,6 +169,7 @@ class AppComponent extends React.Component {
               }}
             />
           </div>
+          <GlobalControls algorithm = {this.state.algorithm} forceChange = {this.algorithmHasChanged}/> 
 
           <div className="controls">
             <SimpleCarousel
@@ -185,13 +184,13 @@ class AppComponent extends React.Component {
                 this.setState({ algorithm: v });
               })} />
 
-            <GlobalControls algorithm = {this.state.algorithm} forceChange = {this.algorithmHasChanged}/> 
             <AlgorithmControls
               algorithm={this.state.algorithm}
               changeTrigger={this.state.changeTrigger} />
               <Contact/> 
           </div>
-        </div>
+
+          <footer></footer>
       </div>
     );
   }

@@ -1,84 +1,81 @@
-
-
 header {
-  flex: 0 0 3rem; 
+  flex: 0 0 3rem;
 }
 
-.index, .main {
-  background-color: $color-panel-grey;
-
-}
-
+.index,
 .main {
+  background-color: $color-panel-grey;
+}
 
-  flex: 1 0 auto;
 
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
-  align-items: stretch;
+.index {
+
+  display: grid; 
+  grid-template-columns: 1fr 2em; 
+  grid-template-rows: 3em 1fr 20em 1em; 
+  grid-template-areas: "header header" "display global" "controls controls" "footer footer";
 
   @include landscape {
-    flex-flow: row nowrap;
+    grid-template-columns: 1fr 3em 30em; 
+    grid-template-rows: 3em 1fr 1em; 
+    grid-template-areas: "header header header"
+     "display global controls"
+     "footer footer footer";
+  
+  }
+
+  header {
+    grid-area: header; 
+  }
+
+  footer {
+    grid-area: footer; 
   }
 
   .canvas-container {
-    flex: 1 0 auto;
-    margin: 0.5em;
-   // box-sizing: border-box;
-    position: relative;
-
-
-      .Canvas {
-        position: absolute;
-        left:0;
-        right:0;
-        top:0;
-        bottom:0; 
-      }
-
-      canvas {
-        position: absolute; 
-        top: 0; 
-        bottom: 0; 
-        height: 100%;
-      }
-
-      .Canvas, canvas {
-        border: solid 1px $color-border-grey;
-        box-sizing: border-box;
-
-        max-width: 500px; 
-        max-height: 500px; 
-
-        
-
-        //  height: calc(100vh - 28rem); 
-        //  width: calc(100vh - 28rem); 
-
-        @include landscape {
-
-          height: calc(100vw - 30rem); 
-          width: calc(100vw - 30rem); 
-
-        }
-      }
-
-
-  
-    
-
-
-
-    }
-
-
+    grid-area: display; 
+  }  
 
   .controls {
-    flex: 0 0 19rem;
+    grid-area: controls; 
+  }
 
+  footer {
+    grid-area: footer; 
+  }
+
+  .global-controls {
+    grid-area: global; 
+  }
+
+
+}
+
+.canvas-container {
+  position: relative;
+  .Canvas {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  canvas {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+  }
+  .Canvas,
+  canvas {
+    border: solid 1px $color-border-grey;
+    box-sizing: border-box;
+    max-width: 500px;
+    max-height: 500px; //  height: calc(100vh - 28rem); 
+    //  width: calc(100vh - 28rem); 
     @include landscape {
-      flex: 0 0 30em;
+      height: calc(100vw - 30rem);
+      width: calc(100vw - 30rem);
     }
   }
 }

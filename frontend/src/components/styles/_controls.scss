@@ -1,81 +1,58 @@
+.global-controls {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  button {
+    min-height: 3em;
+    min-width: 3em;
+    margin: 0.25em;
+  }
+}
 
-  .controls {
-
-
+.controls {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+  .algorithmcontrols-component {
+    flex: 1 0 auto;
     display: flex;
     flex-flow: column nowrap;
-    justify-content: space-between;
-    align-items: stretch;
-
-
-    .global-controls {
-
-      display: flex; 
-      flex-flow: row nowrap; 
-      justify-content: center; 
-
-      button {
-        width: 4em; 
-        height: 3em; 
-        margin: 0.25em; 
-      }
+    .react-tabs__tab-panel--selected {
+      display: block;
+      position: relative; // justify-content: flex-start;
     }
-
-
-    .algorithmcontrols-component {
-
-      flex: 1 0 auto;
+    /* sub panels within a tab*/
+    .controls-container {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      &>* {
+        max-height: 13em;
+      }
+      >.controls-container {
+        position: static;
+        padding: 0;
+        border: none;
+      }
       display: flex;
-      flex-flow: column nowrap;
-
-
-
-      .react-tabs__tab-panel--selected {
-        display: block;
-        position: relative;
-
-        // justify-content: flex-start;
-      }
-
-      /* sub panels within a tab*/
-
-      .controls-container {
-
-        position: absolute;
-        left:0;
-        right:0;
-        top:0;
-        bottom:0;
-
+      flex-flow: row nowrap;
+      overflow-x: auto;
+      align-items: stretch;
+      justify-content: flex-start;
+      @include landscape {
+        align-items: flex-start;
+        flex-flow: row wrap;
+        align-content: flex-start;
         &>* {
-          max-height: 13em;
+          min-height: 12em;
+          margin: 0.2em;
         }
-
-        >.controls-container  {
-          position: static;
-          padding: 0;
-          border: none;
-        }
-
-        display: flex;
-        flex-flow: row nowrap;
-        overflow-x: auto;
-        align-items: stretch;
-        justify-content: flex-start;
-
-        @include landscape {
-          align-items: flex-start;
-          flex-flow: row wrap; 
-          align-content: flex-start;
-
-          &>* {
-            min-height: 12em;
-            margin: 0.2em;
-          }
-        }
-
-        padding: 0.4em 0.2em;
-
       }
+      padding: 0.4em 0.2em;
     }
   }
+}
