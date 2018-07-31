@@ -31,8 +31,18 @@
       top: 0;
       bottom: 0;
       &>* {
-        max-height: 13em;
+        @include tablet-landscape-and-up {
+          min-height: 13em; 
+          max-height: 13em;
+          height: auto;
+          align-self: flex-start;
+          box-sizing: border-box;
+        }
+        align-self: stretch; 
+        height: auto;
       }
+
+
       >.controls-container {
         position: static;
         padding: 0;
@@ -47,10 +57,6 @@
         align-items: flex-start;
         flex-flow: row wrap;
         align-content: flex-start;
-        &>* {
-          min-height: 12em;
-          margin: 0.2em;
-        }
       }
       padding: 0.4em 0.2em;
     }

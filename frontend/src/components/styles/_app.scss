@@ -11,17 +11,22 @@ header {
 .index {
 
   display: grid; 
-  grid-template-columns: 1fr 2em; 
-  grid-template-rows: 3em 1fr 20em 1em; 
+  grid-template-columns: 1fr 4em; 
+  grid-template-rows: 3em 1fr 20em 2em;   //It's good to have a good amount of padding on the footer, because otherwise you are touching the back button on androids.
+
   grid-template-areas: "header header" "display global" "controls controls" "footer footer";
 
-  @include landscape {
-    grid-template-columns: 1fr 3em 30em; 
+
+  @include tablet-landscape-and-up {
+    grid-template-columns: 300px 4em 1fr; 
     grid-template-rows: 3em 1fr 1em; 
     grid-template-areas: "header header header"
      "display global controls"
      "footer footer footer";
-  
+  }
+
+  @include desktop-and-up {
+    grid-template-columns: 500px 4em 1fr; 
   }
 
   header {
@@ -46,6 +51,7 @@ header {
 
   .global-controls {
     grid-area: global; 
+    padding: 0.25em;
   }
 
 
@@ -72,10 +78,22 @@ header {
     box-sizing: border-box;
     max-width: 500px;
     max-height: 500px; //  height: calc(100vh - 28rem); 
-    //  width: calc(100vh - 28rem); 
-    @include landscape {
-      height: calc(100vw - 30rem);
-      width: calc(100vw - 30rem);
+
+
+    @include tablet-landscape-and-up {
+      width: 300px;
+      height: 300px; 
     }
+
+    @include desktop-and-up {
+      width: 500px; 
+      height: 500px;
+    }
+
+    //  width: calc(100vh - 28rem); 
+    // @include landscape {
+    //   height: calc(100vw - 30rem);
+    //   width: calc(100vw - 30rem);
+    // }
   }
 }
