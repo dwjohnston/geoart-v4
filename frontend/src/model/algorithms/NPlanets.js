@@ -28,7 +28,7 @@ class NPlanets extends BaseAlgorithm {
     //    constructor(speed, distance, color, centre, label) {
 
     this.initPhase = 0;
-    let initPlanet = new Planet(1, 0.05, new Color(255,255, 255, 0.02), new Position(0.5,0.5), "base");
+    let initPlanet = new Planet(1, 0.05, new Color(255,255, 255, 0.02), new Position(0.5,0.5), "base", this.baseSpeed);
     
     this.settingsPanel.params = [this.globalSpeed, this.baseColor]; 
 
@@ -139,7 +139,6 @@ class NPlanets extends BaseAlgorithm {
       ]);
 
 
-      console.log(p);
 
 
       return p;

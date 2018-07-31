@@ -25,6 +25,9 @@ import { withRouter } from 'react-router-dom';
 import shortid from "shortid";
 import GlobalControls from './GlobalControls';
 
+
+const version = "1.04"; 
+
 class AppComponent extends React.Component {
 
 
@@ -38,7 +41,7 @@ class AppComponent extends React.Component {
 
   algorithmHasChanged = () =>   {
     /**I very much feel like i'm getting into callback hell here.**/
-    this.setState({ changeTrigger: Math.random() });
+    // this.setState({ changeTrigger: Math.random() });
   }
 
   componentWillMount() {
@@ -126,14 +129,13 @@ class AppComponent extends React.Component {
 
   render() {
 
-    console.log(this.props);
     return (
       <div className="index">
 
         <header>
 
           <span className = "build-num"> 
-            geoplanets.io v1.02
+            geoplanets.io {version}
           </span> 
 
           <button className="btn btn-share" onClick={() => {
@@ -169,7 +171,7 @@ class AppComponent extends React.Component {
               }}
             />
           </div>
-          <GlobalControls algorithm = {this.state.algorithm} forceChange = {this.algorithmHasChanged}/> 
+          <GlobalControls algorithm = {this.state.algorithm} /> 
 
           <div className="controls">
             <SimpleCarousel
@@ -180,13 +182,14 @@ class AppComponent extends React.Component {
                 let core = this.state.canvasCore;
                 core.setDrawingSource(v);
                 v.onChange();
+                v.randomize();
                 this.setState({ canvasCore: core });
                 this.setState({ algorithm: v });
               })} />
 
             <AlgorithmControls
               algorithm={this.state.algorithm}
-              changeTrigger={this.state.changeTrigger} />
+              />
               <Contact/> 
           </div>
 

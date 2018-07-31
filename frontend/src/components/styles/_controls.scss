@@ -37,6 +37,7 @@
           height: auto;
           align-self: flex-start;
           box-sizing: border-box;
+          margin: 0.2em;
         }
         align-self: stretch; 
         height: auto;
@@ -58,7 +59,6 @@
         flex-flow: row wrap;
         align-content: flex-start;
       }
-      padding: 0.4em 0.2em;
     }
   }
 }

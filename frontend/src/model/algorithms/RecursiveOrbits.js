@@ -2,11 +2,8 @@ import Parameter from "../Parameter";
 import ParameterContainer from "../ParameterContainer";
 
 import Planet from "../algoComponents/Planet";
-import LfoPlanet from "../algoComponents/LfoPlanet";
-import Linker from "../algoComponents/Linker";
 
-import {ClearAll, Color, Position, Batch} from 'blacksheep-react-canvas';
-import AlgorithmInterface from "./AlgorithmInterface";
+import {Color, Position} from 'blacksheep-react-canvas';
 import BaseAlgorithm from "./BaseAlgorithm";
 
 

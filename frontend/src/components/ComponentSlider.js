@@ -4,12 +4,30 @@ import Slider from 'react-compound-slider'
 import { Handle, Track } from "./slider/slider";
 
 /**A basic component containing label, value display etc**/
- const ComponentSlider = ({param, changeEvent}) => {
 
 
+
+ class ComponentSlider extends React.Component {
+
+
+
+    constructor(props) {
+      super();
+      this.state = {
+        v: props.param.value
+      }; 
+    }
+
+    onChange = (v) =>  {
+      this.setState({v: v[0]}); 
+      this.props.changeEvent(v[0]); 
+    }
+
+    render() {
+
+    const {param} = this.props;
     let handles = [1];
     let tracks = [1];
-
     return (<div className="slider-wrapper">
 
       <label>{param.label}</label>
@@ -18,23 +36,22 @@ import { Handle, Track } from "./slider/slider";
         domain={[param.min, param.max]}
         step={param.step}
         className="slider"
-        values={[param.value]}
+        values={[this.state.v]}
         mode={2}
         vertical={true}
         reversed = {true}
-        onChange={changeEvent}
+        onChange={this.onChange}
       >
 
         <Slider.Handles>
           {({ handles, getHandleProps }) => (
             <div className="slider-handles">
               {handles.map(handle => {
-                console.log(handle);
                 return (
                   <Handle
                     key={handle.id}
                     handle={handle}
-                    domain={[param.value]}
+                    domain={[this.state.v]}
                     getHandleProps={getHandleProps}
                   />
                 )
@@ -67,14 +84,14 @@ import { Handle, Track } from "./slider/slider";
 
       </Slider>
       <div className="value">
-          {param.value}
+          {this.state.v}
       </div>
     </div>
 
 
 
     );
-  }
+  }}
 
 ComponentSlider.displayName = 'SliderWrapper';
 ComponentSlider.propTypes = {};

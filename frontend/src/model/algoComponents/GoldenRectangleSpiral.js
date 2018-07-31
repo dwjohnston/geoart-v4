@@ -20,7 +20,6 @@ class GoldenRectangleSpiral extends Planet{
 		super(speed, distance, color, center, label,  baseSpeed);
 
 
-		console.log(this.baseSpeed); 
 		this.stagePhaser = new StagePhaser(4, new BasePhaser(this.speed, 0, this.baseSpeed));
 
 		this.goldenRectanglePositioner = new GoldenRectanglePositioner(this.speed, this.distance, this.center, this.stagePhaser);
@@ -40,7 +39,6 @@ class GoldenRectangleSpiral extends Planet{
 
 	resetPhase() {
 
-		console.log("reset phase");
 		super.resetPhase();
 
 		this.goldenSpiralPositioner.reset();
@@ -75,7 +73,6 @@ class GoldenRectangleSpiral extends Planet{
 
 
 	init() {
-		console.log("golden rect init");
 	}
 
 

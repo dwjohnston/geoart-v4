@@ -3,11 +3,10 @@ import React from 'react';
 
 
 
-const GlobalControls = ({algorithm, forceChange}) => {
+const GlobalControls = ({algorithm}) => {
 
     const randomize = () => {
         algorithm.randomize(); 
-        forceChange();
     }
 
     return ( 

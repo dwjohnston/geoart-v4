@@ -13,7 +13,6 @@ class GeoPlanet extends Planet{
 
 
 		super(speed, distance, color, center, label, baseSpeed);
-		console.log(this.baseSpeed);
 
 		this.speed = new Parameter(-10, 10, 1, speed, "speed");
 		this.nSides = 	 new Parameter(1, 10, 1, nSides, "num sides");

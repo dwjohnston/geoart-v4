@@ -50,7 +50,6 @@ class Planet {
 
 	randomize() {
 		this.getParams().forEach(p => {
-			console.log(p);
 			p.randomize()
 		}); 
 	}
