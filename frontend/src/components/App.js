@@ -17,6 +17,7 @@ import Contact from "./Contact";
 
 import fireApp from "../store/google-store";
 import firebase from 'firebase';
+import HelpOverlay from "./HelpOverlay"; 
 
 import _ from 'lodash'; 
 
@@ -167,7 +168,7 @@ closeShare = () => {
       <div className="index">
 
         <header>
-
+          <HelpOverlay/> 
           <span className = "build-num"> 
             geoplanets.io {version}
           </span> 

@@ -42,3 +42,13 @@ label {
 button.glyphicon {
   color: $color-black;
 }
+
+a {
+  &:hover {
+    font-weight: bold; 
+  }
+
+  &:visited {
+    color: white; 
+  }
+}
