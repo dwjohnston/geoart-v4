@@ -3,10 +3,12 @@ import React from 'react';
 
 
 
-const GlobalControls = ({algorithm}) => {
+const GlobalControls = ({algorithm, onEvent}) => {
 
     const randomize = () => {
         algorithm.randomize(); 
+        onEvent(algorithm);
+
     }
 
     return ( 

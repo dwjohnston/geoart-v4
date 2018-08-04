@@ -26,6 +26,14 @@ import 'react-tabs/style/react-tabs.css';
 class AlgorithmControls extends React.Component {
 
 
+  componentWillReceiveProps() {
+    console.log("props");
+  }
+
+  componentWillUpdate() {
+    console.log("update");
+  }
+
   renderPlanet(planet, id) {
 
     let container = [];

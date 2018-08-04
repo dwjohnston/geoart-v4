@@ -127,6 +127,40 @@ class AppComponent extends React.Component {
   }
 
 
+closeShare = () => {
+  this.setState({
+    showShareDialog: false,
+    currentJpeg: false,
+    imageUrl: false,
+  });
+}
+
+  share = () =>  {
+
+      let core = this.state.canvasCore;
+      core.requestJpeg();
+      this.setState({
+        uploadProgress: 0.1,
+      });
+  }
+
+  getJpeg = (v) => {
+    this.handleGetJpeg(v);
+  }
+
+  changeAlgorithm = (v) => {
+    let core = this.state.canvasCore;
+    core.setDrawingSource(v);
+    v.onChange();
+    v.randomize();
+    this.setState({ canvasCore: core });
+    this.setState({ algorithm: v });
+  }
+
+  handleGlobalEvent = (algo) => {
+    this.setState({algorithm: algo}); 
+  }
+
   render() {
 
     return (
@@ -138,13 +172,7 @@ class AppComponent extends React.Component {
             geoplanets.io {version}
           </span> 
 
-          <button className="btn btn-share" onClick={() => {
-            let core = this.state.canvasCore;
-            core.requestJpeg();
-            this.setState({
-              uploadProgress: 0.1,
-            });
-          }}><i className="fas fa-share-alt"></i><span> share your creation</span>
+          <button className="btn btn-share" onClick={this.share}><i className="fas fa-share-alt"></i><span> share your creation</span>
           </button>
 
         </header>
@@ -154,38 +182,23 @@ class AppComponent extends React.Component {
           currentJpeg={this.state.currentJpeg}
           imageUrl={this.state.imageUrl}
           progress={this.state.uploadProgress}
-          onClose={() => {
-            this.setState({
-              showShareDialog: false,
-              currentJpeg: false,
-              imageUrl: false,
-            });
-          }} />
+          onClose={this.closeShare} />
 
           <div className="canvas-container">
             <Canvas id="test-canvas"
               canvasCore={this.state.canvasCore}
               layers={[new CanvasLayer(this.state.algorithm.baseColor), new CanvasLayer(this.state.algorithm.baseColor)]}
-              getJpeg={(v) => {
-                this.handleGetJpeg(v);
-              }}
+              getJpeg={this.getJpeg}
             />
           </div>
-          <GlobalControls algorithm = {this.state.algorithm} /> 
+          <GlobalControls algorithm = {this.state.algorithm} onEvent = {this.handleGlobalEvent}/> 
 
           <div className="controls">
             <SimpleCarousel
               sourceObjects={this.algorithms}
               labelFn={(v) => { return v.name; }}
               name="algorithmsSelector"
-              onChange={((v) => {
-                let core = this.state.canvasCore;
-                core.setDrawingSource(v);
-                v.onChange();
-                v.randomize();
-                this.setState({ canvasCore: core });
-                this.setState({ algorithm: v });
-              })} />
+              onChange={this.changeAlgorithm} />
 
             <AlgorithmControls
               algorithm={this.state.algorithm}

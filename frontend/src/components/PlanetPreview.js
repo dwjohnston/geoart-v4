@@ -1,9 +1,9 @@
 import React from 'react';
 
+const PlanetPreview = ({planet})  => {
 
-class PlanetPreview extends React.Component {
 
-  render() {
+  const color = planet.color; 
     return (
 
       <div className = "planet-preview"> 
@@ -12,20 +12,18 @@ class PlanetPreview extends React.Component {
 
         <div 
           className="planet-preview-outline" 
-          style = {{"borderColor":  this.props.planet.color.shift(50,0).toString()}} >
+          style = {{"borderColor": color?  color.shift(50,0).toString() : 'rgba(0,0,0,0)'}} >
         </div>
 
         <div 
           className = "planet-preview-solid-square" 
-          style = {{"backgroundColor": this.props.planet.color.shift(0, 1).toString()}}
+          style = {{"backgroundColor": color? color.shift(0, 1).toString() : 'rgba(0,0,0,0)'}}
         /> 
       </div> 
     );
   }
-}
+
 
 PlanetPreview.displayName = 'PlanetPreview';
-
-PlanetPreview.defaultProps = {};
 
 export default PlanetPreview;
