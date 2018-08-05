@@ -54,6 +54,10 @@ class BaseAlgorithm extends AlgorithmInterface {
   }
 
 
+  toJson() {
+
+  }
+
 
   randomize() {
 

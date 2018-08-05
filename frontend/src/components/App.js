@@ -59,7 +59,8 @@ class AppComponent extends React.Component {
     ];
 
     let core = new CanvasCore("#000000", 0.04, 2);
-    let firstIndex = _.random(0, this.algorithms.length -1, 0); 
+    //let firstIndex = _.random(0, this.algorithms.length -1, 0); 
+    let firstIndex = 0; 
     let algo = this.algorithms[firstIndex];
 
     core.setDrawingSource(algo);

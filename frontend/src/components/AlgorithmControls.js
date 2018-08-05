@@ -29,6 +29,8 @@ class AlgorithmControls extends React.Component {
   constructor(props) {
     super(); 
 
+
+    console.log(props);
     this.state = {
       algorithm:  props.algorithm, 
       tabs:   this.renderTabs(props.algorithm),
@@ -42,6 +44,8 @@ class AlgorithmControls extends React.Component {
   }
 
   componentWillReceiveProps(props) {
+
+    console.log(props);
     this.setState({
       algorithm:props.algorithm, 
       tabs: this.renderTabs(props.algorithm), 

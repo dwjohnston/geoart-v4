@@ -27,7 +27,6 @@ class GoldenRectangleSpiral extends Planet{
 
 		//(min, max, step, init, label, lfoRange, lfoMinFreq, lfoMaxFreq, lfoFreqInit, lfoAmountInit phase=0
 
-		//console.log(foo);
 
 
 		this.resetPhase();

@@ -1,19 +1,19 @@
 import _ from 'lodash'; 
-
+import {AbstractParameter} from "./AbstractParameter"; 
 
 function round(number, increment, offset) {
   return Math.ceil((number - offset) / increment ) * increment + offset;
 }
 
-class Parameter {
+class Parameter extends AbstractParameter {
 
   constructor(min, max, step, init, label){
+    super();
     this.min = min;
     this.max = max;
     this.step = step;
     this.value = init;
     this.label = label;
-
     this.hasChanged = false;
   }
 

@@ -6,7 +6,7 @@ import SinePhaser from "./modules/phasers/SinePhaser";
 
 
 class Planet {
-	constructor(speed, distance, color, center, label,baseSpeed = new Parameter(1, 1, 1, 1, "base-speed"), phase =0 ) {
+	constructor(speed = 0, distance = 0.25, color = new Color(0,0,0,1), center = new Position(0, 0), label  = "nolabel", baseSpeed = new Parameter(1, 1, 1, 1, "base-speed"), phase =0 ) {
 
 		//min, max, step, init, label
 		this.baseSpeed = baseSpeed;
@@ -45,7 +45,6 @@ class Planet {
 
 
 	getParams() {
-		console.log(this.color); 
 		return [this.baseSpeed, this.speed, this.distance, this.color]; 
 	}
 
