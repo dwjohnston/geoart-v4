@@ -20,12 +20,29 @@ This here is a container intended to wrap any parameters (eg single dimension ra
 */
 class GenericParameterContainer extends Component {
 
-  changeParameter(v) {
+
+  constructor(props) {
+    super(); 
+    this.state = {
+      param: props.param
+    }; 
+  }
+
+  componentWillMount() {
+  }
+
+  componentDidRecieveProps() {
+  }
+
+  componentWillUpdate() {
+  }
+
+  changeParameter= (v) => {
     this.props.param.value = v;
     this.props.onChange(v);
   }
 
-  changeLfoParam(v) {
+  changeLfoParam =(v) => {
 
     this.props.param.value = v.main.value;
     this.props.param.lfoAmount = v.lfoAmount.value;
@@ -38,13 +55,13 @@ class GenericParameterContainer extends Component {
 
   }
 
-  changeColor(v) {
-
+  changeColor = (v) => {
 
     this.props.param.r = v.r;
     this.props.param.g = v.g;
     this.props.param.b = v.b;
     this.props.param.opacity = v.a;
+    this.props.param.a = v.a;
 
     this.props.onChange(v);
 
@@ -59,9 +76,9 @@ class GenericParameterContainer extends Component {
 
     switch(param.constructor) {
 
-      case Parameter: return <ComponentSlider param = {param} changeEvent = {(v) => this.changeParameter(v)}  />;
-      case Color: return <ComponentColorPicker color = {param} changeEvent = {(v) => this.changeColor(v)}/>;
-      case LfoParam : return <ComponentLfoParam param = {param} changeEvent={(v) => this.changeLfoParam(v)}/>;
+      case Parameter: return <ComponentSlider param = {param} changeEvent = {this.changeParameter}  />;
+      case Color: return <ComponentColorPicker color = {param} changeEvent = { this.changeColor}/>;
+      case LfoParam : return <ComponentLfoParam param = {param} changeEvent={this.changeLfoParam}/>;
 
 
       default: return <div> empty</div>;

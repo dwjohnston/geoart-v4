@@ -45,6 +45,7 @@ class Planet {
 
 
 	getParams() {
+		console.log(this.color); 
 		return [this.baseSpeed, this.speed, this.distance, this.color]; 
 	}
 

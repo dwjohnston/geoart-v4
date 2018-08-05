@@ -6,8 +6,18 @@ import {Color} from 'blacksheep-react-canvas';
 import {RgbaPicker} from "react-rgba-color-picker";
 class ComponentColorPicker extends React.Component {
 
+
+  constructor(props) {
+    super(); 
+    this.state = {
+      color: props.color
+    }
+  }
+
   handleChange  = (color) => {
+      this.setState({color: color});      
       this.props.changeEvent(color);
+
   }
 
 
@@ -21,7 +31,7 @@ class ComponentColorPicker extends React.Component {
 
   render() {
     return (
-        <RgbaPicker color={this.props.color} onChange={this.handleChange} />
+        <RgbaPicker color={this.state.color} onChange={this.handleChange} />
         );
       }
     }

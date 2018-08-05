@@ -26,13 +26,29 @@ import 'react-tabs/style/react-tabs.css';
 class AlgorithmControls extends React.Component {
 
 
-  componentWillReceiveProps() {
-    console.log("props");
+  constructor(props) {
+    super(); 
+
+    this.state = {
+      algorithm:  props.algorithm, 
+      tabs:   this.renderTabs(props.algorithm),
+      panels: this.renderTabPanels(props.algorithm)
+    };
+
+    
   }
 
-  componentWillUpdate() {
-    console.log("update");
+  componentDidMount() {
   }
+
+  componentWillReceiveProps(props) {
+    this.setState({
+      algorithm:props.algorithm, 
+      tabs: this.renderTabs(props.algorithm), 
+      panels: this.renderTabPanels(props.algorithm)
+    });
+  }
+
 
   renderPlanet(planet, id) {
 
@@ -53,7 +69,7 @@ class AlgorithmControls extends React.Component {
 
     return <GenericParameterContainer param={param} key={param.id}
       onChange={(v) => {
-        param.hasChanged = true;
+        this.props.onChange(param, v); 
       }}
     />
   }
@@ -63,7 +79,10 @@ class AlgorithmControls extends React.Component {
 
     return <GenericParameterContainer param={color} key={color.id}
       onChange={(v) => {
-        color.hasChanged = true;
+        this.props.onChange(color,v); 
+        this.setState({
+           tabs: this.renderTabs(this.state.algorithm)
+        });
       }} />;
   }
 
@@ -75,7 +94,7 @@ class AlgorithmControls extends React.Component {
       param={param} 
       key={param.id} 
       onChange={(v) => {
-        param.hasChanged = true;
+        this.props.onChange(param, v); 
       }}
      />;
 
@@ -117,46 +136,10 @@ class AlgorithmControls extends React.Component {
     }
   }
 
-  //**MARKED FOR DELETION**/
-  regenParams() {
-    let params = [];
-    let algoParams = this.props.algorithm.params;
-
-    let i = 0;
-    for (let key in algoParams) {
-
-      if (algoParams.hasOwnProperty(key)) {
-
-        let param = algoParams[key];
-
-        params.push(this.genericRender(param, [this.props.algorithm.name, i++].join("-")));
-
-
-      }
-
-    }
-
-    this.setState({ params: params });
-  }
-
-  componentWillMount() {
-    this.setState({ value: 0.6 });
-  }
-
-  componentDidUpdate() {
-
-  }
-
-
-
-
-  renderTabs() {
+  renderTabs(algorithm) {
     let tabs = [];
-    let algoParams = this.props.algorithm.getParams();
-
+    let algoParams = algorithm.getParams();
     let i = 0;
-
-
 
     function renderPreview(param, key) {
 
@@ -172,7 +155,7 @@ class AlgorithmControls extends React.Component {
 
     for (let param of algoParams) {
 
-      let key = [this.props.algorithm.name, param.label, "tab", i++].join("-");
+      let key = [algorithm.name, param.label, "tab", i++].join("-");
 
       tabs.push(<Tab className={"react-tabs__tab "} key={key}>
         {renderPreview(param, key)}
@@ -182,13 +165,13 @@ class AlgorithmControls extends React.Component {
 
   }
 
-  renderTabPanels() {
+  renderTabPanels(algorithm) {
     let panels = [];
-    let algoParams = this.props.algorithm.getParams();
+    let algoParams = algorithm.getParams();
     let i = 0;
 
     for (let param of algoParams) {
-      let key = [this.props.algorithm.name, param.label, "tab-panel", i++].join("-");
+      let key = [algorithm.name, param.label, "tab-panel", i++].join("-");
       panels.push(<TabPanel key={key}>{this.genericRender(param)}</TabPanel>);
     }
 
@@ -201,9 +184,9 @@ class AlgorithmControls extends React.Component {
       <div className="algorithmcontrols-component">
         <Tabs>
           <TabList>
-            {this.renderTabs()}
+            {this.state.tabs}
           </TabList>
-          {this.renderTabPanels()}
+          {this.state.panels}
         </Tabs>
       </div>
     );

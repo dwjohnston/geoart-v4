@@ -17,7 +17,8 @@
     "firebase-functions": "^1.0.1",
     "image-data-uri": "^1.1.0",
     "progress-stream": "^2.0.0",
-    "shortid": "^2.2.8"
+    "shortid": "^2.2.8",
+    "twitter": "^1.7.1"
   },
   "devDependencies": {
     "eslint": "^4.12.0",

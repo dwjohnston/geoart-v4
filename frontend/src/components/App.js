@@ -27,7 +27,7 @@ import shortid from "shortid";
 import GlobalControls from './GlobalControls';
 
 
-const version = "1.04"; 
+const version = "1.10"; 
 
 class AppComponent extends React.Component {
 
@@ -162,6 +162,10 @@ closeShare = () => {
     this.setState({algorithm: algo}); 
   }
 
+  onParamChange = (param, v) => {
+    param.hasChanged = true; 
+  }; 
+  
   render() {
 
     return (
@@ -203,6 +207,8 @@ closeShare = () => {
 
             <AlgorithmControls
               algorithm={this.state.algorithm}
+              onChange = {this.onParamChange}
+              
               />
               <Contact/> 
           </div>

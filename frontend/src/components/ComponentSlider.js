@@ -24,7 +24,6 @@ import { Handle, Track } from "./slider/slider";
     }
 
     render() {
-
     const {param} = this.props;
     let handles = [1];
     let tracks = [1];
