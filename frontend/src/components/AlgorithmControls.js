@@ -1,21 +1,21 @@
 import React from 'react';
 import GenericParameterContainer from "./GenericParameterContainer";
 
-import Planet from '../model/algoComponents/Planet';
-import LfoPlanet from '../model/algoComponents/LfoPlanet';
-import GeoPlanet from '../model/algoComponents/GeoPlanet';
-import FunkyGeoPlanet from '../model/algoComponents/FunkyGeoPlanet';
-import GoldenRectangleSpiral from '../model/algoComponents/GoldenRectangleSpiral';
+// import Planet from '../model/algoComponents/Planet';
+// import LfoPlanet from '../model/algoComponents/LfoPlanet';
+// import GeoPlanet from '../model/algoComponents/GeoPlanet';
+// import FunkyGeoPlanet from '../model/algoComponents/FunkyGeoPlanet';
+//import GoldenRectangleSpiral from '../model/algoComponents/GoldenRectangleSpiral';
 
 import ComponentColorPicker from "./ComponentColorPicker";
 
-import Parameter from '../model/Parameter';
+import {Parameter, ColorParameter, PlanetParameter} from 'geoplanets-model';
 
-import ParameterContainer from '../model/ParameterContainer';
+//import ParameterContainer from '../model/ParameterContainer';
 
-import LfoParam from '../model/LfoParam';
+//import LfoParam from '../model/LfoParam';
 
-import { Color } from 'blacksheep-react-canvas';
+import {Color} from "blacksheep-geometry"; 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 //import Slider from "blacksheep-react-round-slider";
 import Slider from "./slider/slider";
@@ -125,16 +125,16 @@ class AlgorithmControls extends React.Component {
   genericRender(param, id) {
 
     switch (param.constructor) {
-      case Planet: return this.renderPlanet(param, id);
-      case LfoPlanet: return this.renderPlanet(param, id);
-      case GeoPlanet: return this.renderPlanet(param, id);
-      case FunkyGeoPlanet: return this.renderPlanet(param, id);
-      case GoldenRectangleSpiral: return this.renderPlanet(param, id);
+      case PlanetParameter: return this.renderPlanet(param, id);
+     // case LfoPlanet: return this.renderPlanet(param, id);
+     // case GeoPlanet: return this.renderPlanet(param, id);
+     // case FunkyGeoPlanet: return this.renderPlanet(param, id);
+     // case GoldenRectangleSpiral: return this.renderPlanet(param, id);
 
       case Parameter: return this.renderParameter(param, id);
-      case Color: return this.renderColor(param, id);
-      case LfoParam: return this.renderLfoParam(param, id);
-      case ParameterContainer: return this.renderParameterContainer(param, id);
+      case ColorParameter: return this.renderColor(param, id);
+     // case LfoParam: return this.renderLfoParam(param, id);
+     // case ParameterContainer: return this.renderParameterContainer(param, id);
 
       default: return this.renderError(param, id);
     }
@@ -144,14 +144,14 @@ class AlgorithmControls extends React.Component {
     let tabs = [];
     let algoParams = algorithm.getParams();
     let i = 0;
-
+    console.log(algoParams); 
     function renderPreview(param, key) {
 
       switch (param.constructor) {
-        case Planet: return <PlanetPreview planet={param} key ={key} />;
-        case GeoPlanet: return <PlanetPreview planet={param} key ={key}/>;
-        case FunkyGeoPlanet: return <PlanetPreview planet={param} key ={key}/>;
-        case ParameterContainer:  <i className={param.tabClassName || "fas fa-question"} key ={key}/>; 
+        case PlanetParameter: return <PlanetPreview planet={param} key ={key} />;
+        //case GeoPlanet: return <PlanetPreview planet={param} key ={key}/>;
+        //case FunkyGeoPlanet: return <PlanetPreview planet={param} key ={key}/>;
+        //case ParameterContainer:  <i className={param.tabClassName || "fas fa-question"} key ={key}/>; 
         default: return <i className={param.tabClassName || "fas fa-question"} key ={key}/>;
       }
     }

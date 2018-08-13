@@ -1,15 +1,6 @@
 import React from 'react';
-import { Canvas, CanvasCore, Circle, Color, Position, CanvasLayer } from 'blacksheep-react-canvas';
-import Parameter from '../model/Parameter';
-import ThreePlanets from "../model/algorithms/ThreePlanets";
-import GeoPlanets from "../model/algorithms/GeoPlanets";
-import NestedPolygons from "../model/algorithms/NestedPolygons";
-import EarthVenus from "../model/algorithms/EarthVenus";
-import ThreeOrbits from "../model/algorithms/ThreeOrbits";
-import NPlanets from "../model/algorithms/NPlanets";
-import BasicOrbits from "../model/algorithms/BasicOrbits";
-import RecursiveOrbits from "../model/algorithms/RecursiveOrbits";
-import GoldenRectangle from "../model/algorithms/GoldenRectangle";
+import { Canvas, CanvasCore, CanvasLayer } from 'blacksheep-react-canvas';
+import {ThreeOrbits} from "geoplanets-model";
 import SimpleCarousel from 'blacksheep-react-carousel';
 import ShareOverlay from "./ShareOverlay";
 import AlgorithmControls from "./AlgorithmControls";
@@ -40,21 +31,17 @@ class AppComponent extends React.Component {
     }
   }
 
-  algorithmHasChanged = () =>   {
-    /**I very much feel like i'm getting into callback hell here.**/
-    // this.setState({ changeTrigger: Math.random() });
-  }
 
   componentWillMount() {
 
 
     this.algorithms = [
-      new ThreeOrbits(() => this.algorithmHasChanged()),
-      new EarthVenus(() => this.algorithmHasChanged()),
-      new GeoPlanets(() => this.algorithmHasChanged()),
-      new NestedPolygons(() => this.algorithmHasChanged()),
-      //new GoldenRectangle(() => this.algorithmHasChanged()),
-      new NPlanets(() => this.algorithmHasChanged()),
+      new ThreeOrbits()
+//      new EarthVenus(() => this.algorithmHasChanged()),
+      // new GeoPlanets(() => this.algorithmHasChanged()),
+      // new NestedPolygons(() => this.algorithmHasChanged()),
+      // //new GoldenRectangle(() => this.algorithmHasChanged()),
+      // new NPlanets(() => this.algorithmHasChanged()),
       //new RecursiveOrbits(() => this.algorithmHasChanged()),
     ];
 

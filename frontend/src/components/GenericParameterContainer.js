@@ -4,13 +4,13 @@ import React, {
 } from 'react';
 
 import PropTypes from 'prop-types';
-import Parameter from '../model/Parameter';
-import LfoParam from "../model/LfoParam";
-import {Color} from "blacksheep-react-canvas";
+import {Parameter, ColorParameter} from 'geoplanets-model';
+//import LfoParam from "../model/LfoParam";
+import {Color} from "blacksheep-geometry";
 
 import ComponentSlider from "./ComponentSlider";
 import ComponentColorPicker from "./ComponentColorPicker";
-import ComponentLfoParam from "./ComponentLfoParam";
+//import ComponentLfoParam from "./ComponentLfoParam";
 
 
 
@@ -77,8 +77,8 @@ class GenericParameterContainer extends Component {
     switch(param.constructor) {
 
       case Parameter: return <ComponentSlider param = {param} changeEvent = {this.changeParameter}  />;
-      case Color: return <ComponentColorPicker color = {param} changeEvent = { this.changeColor}/>;
-      case LfoParam : return <ComponentLfoParam param = {param} changeEvent={this.changeLfoParam}/>;
+      case ColorParameter: return <ComponentColorPicker color = {param} changeEvent = { this.changeColor}/>;
+      //case LfoParam : return <ComponentLfoParam param = {param} changeEvent={this.changeLfoParam}/>;
 
 
       default: return <div> empty</div>;

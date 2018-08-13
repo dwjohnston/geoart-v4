@@ -1,8 +1,4 @@
 import React from 'react';
-import ComponentSlider from "./ComponentSlider";
-import Parameter from "../model/Parameter";
-
-import {Color} from 'blacksheep-react-canvas';
 import {RgbaPicker} from "react-rgba-color-picker";
 class ComponentColorPicker extends React.Component {
 
