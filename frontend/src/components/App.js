@@ -1,6 +1,6 @@
 import React from 'react';
 import { Canvas, CanvasCore, CanvasLayer } from 'blacksheep-react-canvas';
-import {ThreeOrbits} from "geoplanets-model";
+import {Test} from "geoplanets-model";
 import SimpleCarousel from 'blacksheep-react-carousel';
 import ShareOverlay from "./ShareOverlay";
 import AlgorithmControls from "./AlgorithmControls";
@@ -36,7 +36,7 @@ class AppComponent extends React.Component {
 
 
     this.algorithms = [
-      new ThreeOrbits()
+      new Test()
 //      new EarthVenus(() => this.algorithmHasChanged()),
       // new GeoPlanets(() => this.algorithmHasChanged()),
       // new NestedPolygons(() => this.algorithmHasChanged()),
@@ -180,7 +180,7 @@ closeShare = () => {
           <div className="canvas-container">
             <Canvas id="test-canvas"
               canvasCore={this.state.canvasCore}
-              layers={[new CanvasLayer(this.state.algorithm.baseColor), new CanvasLayer(this.state.algorithm.baseColor)]}
+              layers={[new CanvasLayer(this.state.algorithm.baseColor.getValue()), new CanvasLayer(this.state.algorithm.baseColor.getValue())]}
               getJpeg={this.getJpeg}
             />
           </div>

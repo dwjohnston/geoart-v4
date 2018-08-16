@@ -10,6 +10,10 @@
   }
 }
 
+.slider-wrapper {
+  min-height: 15em;
+}
+
 .controls {
   display: flex;
   flex-flow: column nowrap;
@@ -20,7 +24,7 @@
     display: flex;
     flex-flow: column nowrap;
     .react-tabs__tab-panel--selected {
-      display: block;
+      display: flex;
       position: relative; // justify-content: flex-start;
     }
     /* sub panels within a tab*/

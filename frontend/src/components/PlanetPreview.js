@@ -1,9 +1,8 @@
 import React from 'react';
 
-const PlanetPreview = ({planet})  => {
+const PlanetPreview = ({color})  => {
 
-
-  const color = planet.color; 
+    
     return (
 
       <div className = "planet-preview"> 

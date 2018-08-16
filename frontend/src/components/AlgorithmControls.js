@@ -1,5 +1,4 @@
 import React from 'react';
-import GenericParameterContainer from "./GenericParameterContainer";
 
 // import Planet from '../model/algoComponents/Planet';
 // import LfoPlanet from '../model/algoComponents/LfoPlanet';
@@ -8,19 +7,19 @@ import GenericParameterContainer from "./GenericParameterContainer";
 //import GoldenRectangleSpiral from '../model/algoComponents/GoldenRectangleSpiral';
 
 import ComponentColorPicker from "./ComponentColorPicker";
+import ComponentSlider from "./ComponentSlider"; 
 
-import {Parameter, ColorParameter, PlanetParameter} from 'geoplanets-model';
+import {SimpleParameter, ColorParameter, PlanetParameter} from 'geoplanets-model';
 
 //import ParameterContainer from '../model/ParameterContainer';
 
 //import LfoParam from '../model/LfoParam';
 
-import {Color} from "blacksheep-geometry"; 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 //import Slider from "blacksheep-react-round-slider";
-import Slider from "./slider/slider";
 import PlanetPreview from './PlanetPreview';
 import 'react-tabs/style/react-tabs.css';
+import { fullClone } from 'davids-toolbox';
 
 
 class AlgorithmControls extends React.Component {
@@ -53,26 +52,13 @@ class AlgorithmControls extends React.Component {
     });
   }
 
-
-  renderPlanet(planet, id) {
-
-    let container = [];
-
-    id = [id, "planet", planet.label].join("-");
-    for (let planetParam of planet.getParams()) {
-      container.push(this.genericRender(planetParam, id));
-    }
-
-
-    return <div className="controls-container" key = {id}>{container}</div>
-  }
-
   renderParameter(param, id) {
 
     param.id = [id, "param", param.label].join("-");
 
-    return <GenericParameterContainer param={param} key={param.id}
-      onChange={(v) => {
+    return <ComponentSlider param={param} key={param.id}
+      changeEvent={(v) => {
+        param.updateValue(v); 
         this.props.onChange(param, v); 
       }}
     />
@@ -81,102 +67,84 @@ class AlgorithmControls extends React.Component {
   renderColor(color, id) {
     color.id = [id, "color"].join("-");
 
-    return <GenericParameterContainer param={color} key={color.id}
-      onChange={(v) => {
-        this.props.onChange(color,v); 
+    return <ComponentColorPicker color = {color}  key={color.id}
+    changeEvent ={(v) => {
+  
+      let newColor =     Object.assign(fullClone(color.getValue()), v); 
+      color.updateValue(newColor);
+      
         this.setState({
            tabs: this.renderTabs(this.state.algorithm)
         });
       }} />;
   }
 
-  renderLfoParam(param, id) {
-
-    param.id = [id, "lfoparam"].join("-");
-
-    return <GenericParameterContainer 
-      param={param} 
-      key={param.id} 
-      onChange={(v) => {
-        this.props.onChange(param, v); 
-      }}
-     />;
-
-  }
-
-  renderParameterContainer(param, id) {
-
-    let container = [];
-
-    id = [id, "paramcontainer", param.label].join("-");
-    for (let childParam of param.params) {
-      container.push(this.genericRender(childParam, id));
-    }
-
-
-    return <div className="controls-container" key={id}>{container} </div>
-
-  }
-
   renderError(param, id) {
     return <div> render error: {id} {param.label}</div>
   }
 
-  genericRender(param, id) {
+  genericRender(group, id) {
 
-    switch (param.constructor) {
-      case PlanetParameter: return this.renderPlanet(param, id);
-     // case LfoPlanet: return this.renderPlanet(param, id);
-     // case GeoPlanet: return this.renderPlanet(param, id);
-     // case FunkyGeoPlanet: return this.renderPlanet(param, id);
-     // case GoldenRectangleSpiral: return this.renderPlanet(param, id);
+    return group.params.map(param => {
 
-      case Parameter: return this.renderParameter(param, id);
-      case ColorParameter: return this.renderColor(param, id);
-     // case LfoParam: return this.renderLfoParam(param, id);
-     // case ParameterContainer: return this.renderParameterContainer(param, id);
+      console.log(param);
+      switch (param.constructor) {
+        //case PlanetParameter: return this.renderPlanet(param, id);
+       // case LfoPlanet: return this.renderPlanet(param, id);
+       // case GeoPlanet: return this.renderPlanet(param, id);
+       // case FunkyGeoPlanet: return this.renderPlanet(param, id);
+       // case GoldenRectangleSpiral: return this.renderPlanet(param, id);
+  
+        case SimpleParameter: return this.renderParameter(param, id);
+        case ColorParameter: return this.renderColor(param, id);
+       // case LfoParam: return this.renderLfoParam(param, id);
+       // case ParameterContainer: return this.renderParameterContainer(param, id);
+  
+        default: return this.renderError(param, id);
+      }
 
-      default: return this.renderError(param, id);
-    }
+    })
+
   }
 
   renderTabs(algorithm) {
     let tabs = [];
-    let algoParams = algorithm.getParams();
+    let algoParams = algorithm.getRenderHint();
     let i = 0;
     console.log(algoParams); 
-    function renderPreview(param, key) {
+    function renderPreview(param, rkey) {
 
-      switch (param.constructor) {
-        case PlanetParameter: return <PlanetPreview planet={param} key ={key} />;
+      switch (param.type) {
+        case "planet": return <PlanetPreview color={param.color} key ={rkey} />;
         //case GeoPlanet: return <PlanetPreview planet={param} key ={key}/>;
         //case FunkyGeoPlanet: return <PlanetPreview planet={param} key ={key}/>;
         //case ParameterContainer:  <i className={param.tabClassName || "fas fa-question"} key ={key}/>; 
-        default: return <i className={param.tabClassName || "fas fa-question"} key ={key}/>;
+        default: return <i className={param.icon || "fas fa-question"} key ={rkey}/>;
       }
     }
 
 
-    for (let param of algoParams) {
 
-      let key = [algorithm.name, param.label, "tab", i++].join("-");
-
-      tabs.push(<Tab className={"react-tabs__tab "} key={key}>
-        {renderPreview(param, key)}
+    for (let [key, value] of Object.entries(algoParams)) {
+      console.log(key, value); 
+      let rkey = [algorithm.name, value.label, "tab", i++].join("-");
+      tabs.push(<Tab className={"react-tabs__tab "} key={rkey}>
+        {renderPreview(value, rkey)}
       </Tab>);
     }
+
     return tabs;
 
   }
 
   renderTabPanels(algorithm) {
     let panels = [];
-    let algoParams = algorithm.getParams();
+    let algoParams = algorithm.getRenderHint();
     let i = 0;
 
-    for (let param of algoParams) {
-      let key = [algorithm.name, param.label, "tab-panel", i++].join("-");
-      panels.push(<TabPanel key={key}>{this.genericRender(param)}</TabPanel>);
+    for (let group of Object.values(algorithm.getRenderHint())) {
+      let key = [algorithm.name, "tab-panel", i++].join("-");
+      panels.push(<TabPanel key={key}>{this.genericRender(group)}</TabPanel>);
     }
 
     return panels;
