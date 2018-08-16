@@ -142,9 +142,9 @@ class AlgorithmControls extends React.Component {
     let algoParams = algorithm.getRenderHint();
     let i = 0;
 
-    for (let group of Object.values(algorithm.getRenderHint())) {
-      let key = [algorithm.name, "tab-panel", i++].join("-");
-      panels.push(<TabPanel key={key}>{this.genericRender(group)}</TabPanel>);
+    for (let [key, group] of Object.entries(algorithm.getRenderHint())) {
+      let rkey = [algorithm.name, "tab-panel", i++].join("-");
+      panels.push(<TabPanel key={rkey}>{this.genericRender(group, key)}</TabPanel>);
     }
 
     return panels;
