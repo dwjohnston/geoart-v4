@@ -67,7 +67,7 @@ class AlgorithmControls extends React.Component {
   renderColor(color, id) {
     color.id = [id, "color"].join("-");
 
-    return <ComponentColorPicker color = {color}  key={color.id}
+    return <ComponentColorPicker color = {color.getValue()}  key={color.id}
     changeEvent ={(v) => {
   
       let newColor =     Object.assign(fullClone(color.getValue()), v); 
@@ -119,7 +119,7 @@ class AlgorithmControls extends React.Component {
         //case GeoPlanet: return <PlanetPreview planet={param} key ={key}/>;
         //case FunkyGeoPlanet: return <PlanetPreview planet={param} key ={key}/>;
         //case ParameterContainer:  <i className={param.tabClassName || "fas fa-question"} key ={key}/>; 
-        default: return <i className={param.icon || "fas fa-question"} key ={rkey}/>;
+        default: return <i className={"fas fa-" + param.icon || "fas fa-question"} key ={rkey}/>;
       }
     }
 

@@ -194,7 +194,7 @@ closeShare = () => {
           <div className="controls">
             <SimpleCarousel
               sourceObjects={this.algorithms}
-              labelFn={(v) => { return v.name; }}
+              labelFn={(v) => { return v.label; }}
               name="algorithmsSelector"
               onChange={this.changeAlgorithm} />
 
