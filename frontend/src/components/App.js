@@ -1,6 +1,6 @@
 import React from 'react';
 import { Canvas, CanvasCore, CanvasLayer } from 'blacksheep-react-canvas';
-import {Test, GeoPlanets, GeoPlanetsTwo, ThreeOrbits, NGeo} from "geoplanets-model";
+import {Test, GeoPlanets, GeoPlanetsTwo, ThreeOrbits, NGeo, ThreeOrbitsGeo, EarthVenus} from "geoplanets-model";
 import SimpleCarousel from 'blacksheep-react-carousel';
 import ShareOverlay from "./ShareOverlay";
 import AlgorithmControls from "./AlgorithmControls";
@@ -36,18 +36,14 @@ class AppComponent extends React.Component {
 
 
     this.algorithms = [
-      new Test(), 
+      new ThreeOrbits(), 
+      new ThreeOrbitsGeo(), 
+      new EarthVenus(),
       new GeoPlanets(), 
       new GeoPlanetsTwo(),
-      new ThreeOrbits(), 
       new NGeo(), 
+      new Test(), 
 
-//      new EarthVenus(() => this.algorithmHasChanged()),
-      // new GeoPlanets(() => this.algorithmHasChanged()),
-      // new NestedPolygons(() => this.algorithmHasChanged()),
-      // //new GoldenRectangle(() => this.algorithmHasChanged()),
-      // new NPlanets(() => this.algorithmHasChanged()),
-      //new RecursiveOrbits(() => this.algorithmHasChanged()),
     ];
 
     let core = new CanvasCore("#000000", 0.04, 2);

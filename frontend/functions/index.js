@@ -2,13 +2,15 @@ const express = require('express');
 const functions = require('firebase-functions');
 const admin = require("firebase-admin");
 const Twitter = require('twitter');
-var serviceAccount = require('./service-account.json');
-
+var serviceAccount = require('./admin-credential-geoart-staging-firebase-adminsdk-8vzo5-6f60463b2e.json');
+import moment from "moment";
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://geoart-v4.firebaseio.com"
+  //databaseURL: "https://geoart-v4.firebaseio.com"
 });
+
+//admin.initializeApp();
 
 var twitterClient = new Twitter({
   consumer_key: functions.config().twitter.consumer.key,
@@ -20,7 +22,7 @@ var twitterClient = new Twitter({
 
 
 var defaultStorage = admin.storage();
-var bucket = defaultStorage.bucket('geoart-v4.appspot.com');
+var bucket = defaultStorage.bucket(functions.config().gcp.bucket);
 
 const app = express();
 const path = require('path');
@@ -123,9 +125,26 @@ exports.onNewImage = functions.storage.object().onFinalize((object) => {
         }
       });
 
+
+      fetch("https://platform.hootsuite.com/v1/messages", {
+        method: "POST",
+        body: {
+          text: "test",
+          socialProfileIds: ["geoplanets.io"],
+          scheduledSendTime: moment().format() + "Z",
+          media: file
+
+        }
+      }
+
+
+      ).then((res) => {
+        console.log("sucess");
+      }).catch(err => {
+        console.log(err)
+      });
+
     }
-
-
   });
   return prom.prom;
 

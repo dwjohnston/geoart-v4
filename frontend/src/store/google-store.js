@@ -1,7 +1,7 @@
 import firebase from "firebase"; 
-//import config from "./api-key"; 
+import config from "./api-key"; 
     
-const fireApp = firebase.initializeApp();
+const fireApp = firebase.initializeApp(config);
 
 export default fireApp; 
 

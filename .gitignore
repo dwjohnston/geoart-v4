@@ -6,7 +6,7 @@ frontend/src/**/*.css
 frontend/functions/index.html
 
 frontend/functions/service-account.json
-api-key.js
+api-key.json
 
 
 
