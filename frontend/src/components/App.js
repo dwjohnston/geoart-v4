@@ -1,16 +1,16 @@
 import React from 'react';
 import { Canvas, CanvasCore, CanvasLayer } from 'blacksheep-react-canvas';
-import {Test, GeoPlanets, GeoPlanetsTwo, ThreeOrbits, NGeo, ThreeOrbitsGeo, EarthVenus, TestTwo} from "geoplanets-model";
+import { Test, GeoPlanets, GeoPlanetsTwo, ThreeOrbits, NGeo, Strings, ThreeOrbitsGeo, EarthVenus, TestTwo } from "geoplanets-model";
 import SimpleCarousel from 'blacksheep-react-carousel';
 import ShareOverlay from "./ShareOverlay";
 import AlgorithmControls from "./AlgorithmControls";
-import Contact from "./Contact"; 
+import Contact from "./Contact";
 
 import fireApp from "../store/google-store";
 import firebase from 'firebase';
-import HelpOverlay from "./HelpOverlay"; 
+import HelpOverlay from "./HelpOverlay";
 
-import _ from 'lodash'; 
+import _ from 'lodash';
 
 import { withRouter } from 'react-router-dom';
 
@@ -18,7 +18,7 @@ import shortid from "shortid";
 import GlobalControls from './GlobalControls';
 
 
-const version = "1.10"; 
+const version = "1.10";
 
 class AppComponent extends React.Component {
 
@@ -36,20 +36,21 @@ class AppComponent extends React.Component {
 
 
     this.algorithms = [
+      new Strings(),
       new TestTwo(),
-      new ThreeOrbits(), 
-      new ThreeOrbitsGeo(), 
+      new ThreeOrbits(),
+      new ThreeOrbitsGeo(),
       new EarthVenus(),
-      new GeoPlanets(), 
+      new GeoPlanets(),
       new GeoPlanetsTwo(),
-      new NGeo(), 
-      new Test(), 
+      new NGeo(),
+      new Test(),
 
     ];
 
     let core = new CanvasCore("#000000", 0.04, 2);
     //let firstIndex = _.random(0, this.algorithms.length -1, 0); 
-    let firstIndex = 0; 
+    let firstIndex = 0;
     let algo = this.algorithms[firstIndex];
 
     core.setDrawingSource(algo);
@@ -118,21 +119,21 @@ class AppComponent extends React.Component {
   }
 
 
-closeShare = () => {
-  this.setState({
-    showShareDialog: false,
-    currentJpeg: false,
-    imageUrl: false,
-  });
-}
+  closeShare = () => {
+    this.setState({
+      showShareDialog: false,
+      currentJpeg: false,
+      imageUrl: false,
+    });
+  }
 
-  share = () =>  {
+  share = () => {
 
-      let core = this.state.canvasCore;
-      core.requestJpeg();
-      this.setState({
-        uploadProgress: 0.1,
-      });
+    let core = this.state.canvasCore;
+    core.requestJpeg();
+    this.setState({
+      uploadProgress: 0.1,
+    });
   }
 
   getJpeg = (v) => {
@@ -143,30 +144,30 @@ closeShare = () => {
     let core = this.state.canvasCore;
     core.setDrawingSource(v);
     //v.onChange();
-    v.requestClear(); 
+    v.requestClear();
     v.randomize();
     this.setState({ canvasCore: core });
     this.setState({ algorithm: v });
   }
 
   handleGlobalEvent = (algo) => {
-    this.setState({algorithm: algo}); 
+    this.setState({ algorithm: algo });
   }
 
   onParamChange = (param, v) => {
-    param.hasChanged = true; 
-  }; 
-  
+    param.hasChanged = true;
+  };
+
   render() {
 
     return (
       <div className="index">
 
         <header>
-          <HelpOverlay/> 
-          <span className = "build-num"> 
+          <HelpOverlay />
+          <span className="build-num">
             geoplanets.io {version}
-          </span> 
+          </span>
 
           <button className="btn btn-share" onClick={this.share}><i className="fas fa-share-alt"></i><span> share your creation</span>
           </button>
@@ -180,31 +181,31 @@ closeShare = () => {
           progress={this.state.uploadProgress}
           onClose={this.closeShare} />
 
-          <div className="canvas-container">
-            <Canvas id="test-canvas"
-              canvasCore={this.state.canvasCore}
-              layers={[new CanvasLayer(this.state.algorithm.baseColor.getValue()), new CanvasLayer(this.state.algorithm.baseColor.getValue())]}
-              getJpeg={this.getJpeg}
-            />
-          </div>
-          <GlobalControls algorithm = {this.state.algorithm} onEvent = {this.handleGlobalEvent}/> 
+        <div className="canvas-container">
+          <Canvas id="test-canvas"
+            canvasCore={this.state.canvasCore}
+            layers={[new CanvasLayer(this.state.algorithm.baseColor.getValue()), new CanvasLayer(this.state.algorithm.baseColor.getValue())]}
+            getJpeg={this.getJpeg}
+          />
+        </div>
+        <GlobalControls algorithm={this.state.algorithm} onEvent={this.handleGlobalEvent} />
 
-          <div className="controls">
-            <SimpleCarousel
-              sourceObjects={this.algorithms}
-              labelFn={(v) => { return v.label; }}
-              name="algorithmsSelector"
-              onChange={this.changeAlgorithm} />
+        <div className="controls">
+          <SimpleCarousel
+            sourceObjects={this.algorithms}
+            labelFn={(v) => { return v.label; }}
+            name="algorithmsSelector"
+            onChange={this.changeAlgorithm} />
 
-            <AlgorithmControls
-              algorithm={this.state.algorithm}
-              onChange = {this.onParamChange}
-              
-              />
-              <Contact/> 
-          </div>
+          <AlgorithmControls
+            algorithm={this.state.algorithm}
+            onChange={this.onParamChange}
 
-          <footer></footer>
+          />
+          <Contact />
+        </div>
+
+        <footer></footer>
       </div>
     );
   }
