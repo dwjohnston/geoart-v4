@@ -1,7 +1,7 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 **/*.log
 frontend/.vscode
-
+api-key.json 
 frontend/src/**/*.css
 frontend/functions/index.html
 
