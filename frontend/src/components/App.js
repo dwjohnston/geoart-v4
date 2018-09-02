@@ -18,7 +18,7 @@ import shortid from "shortid";
 import GlobalControls from './GlobalControls';
 
 
-const version = "1.20";
+const version = "1.21";
 
 class AppComponent extends React.Component {
 
