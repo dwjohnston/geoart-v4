@@ -6,6 +6,12 @@
     justify-content: space-between; 
     align-items: center;
 
+    &>div {
+        flex: 1 0 auto; 
+    }
+    &>* {
+        margin: 0.3em; 
+    }
 
     @include landscape {
         display: flex; 

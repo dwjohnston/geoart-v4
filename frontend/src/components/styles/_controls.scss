@@ -20,45 +20,35 @@
     display: flex;
     flex-flow: column nowrap;
     .react-tabs__tab-panel--selected {
-      display: block;
-      position: relative; // justify-content: flex-start;
-    }
-    /* sub panels within a tab*/
-    .controls-container {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      &>* {
-        @include tablet-landscape-and-up {
-          min-height: 13em; 
-          max-height: 13em;
-          height: auto;
-          align-self: flex-start;
-          box-sizing: border-box;
-          margin: 0.2em;
-        }
-        align-self: stretch; 
-        height: auto;
-      }
-
-
-      >.controls-container {
-        position: static;
-        padding: 0;
-        border: none;
-      }
       display: flex;
-      flex-flow: row nowrap;
-      overflow-x: auto;
+      flex-flow: row nowrap; 
+      position: relative; // justify-content: flex-start;
       align-items: stretch;
-      justify-content: flex-start;
+      overflow-x: auto;
+
+
       @include landscape {
-        align-items: flex-start;
-        flex-flow: row wrap;
-        align-content: flex-start;
+        flex-flow: row wrap; 
+        &>* {
+          max-height: 15em;
+        }
       }
+ 
+
+      .slider-wrapper {
+        height: auto; 
+      }
+      .rgba-picker {
+        margin: 0; 
+        height: auto; 
+        border: none; 
+
+        .slider-wrapper {
+          height: 100%; 
+        }
+      }
+
     }
+
   }
 }

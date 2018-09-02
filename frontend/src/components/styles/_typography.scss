@@ -48,7 +48,11 @@ a {
     font-weight: bold; 
   }
 
-  &:visited {
+  &, &:active, &:visited {
     color: white; 
   }
+}
+
+p {
+  line-height: 1.2; 
 }

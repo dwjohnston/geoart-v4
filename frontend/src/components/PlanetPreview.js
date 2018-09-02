@@ -1,9 +1,8 @@
 import React from 'react';
 
-const PlanetPreview = ({planet})  => {
+const PlanetPreview = ({color})  => {
 
-
-  const color = planet.color; 
+    
     return (
 
       <div className = "planet-preview"> 
@@ -12,12 +11,12 @@ const PlanetPreview = ({planet})  => {
 
         <div 
           className="planet-preview-outline" 
-          style = {{"borderColor": color?  color.shift(50,0).toString() : 'rgba(0,0,0,0)'}} >
+          style = {{"borderColor": color?  color.getValue().shift(50,0).toString() : 'rgba(0,0,0,0)'}} >
         </div>
 
         <div 
           className = "planet-preview-solid-square" 
-          style = {{"backgroundColor": color? color.shift(0, 1).toString() : 'rgba(0,0,0,0)'}}
+          style = {{"backgroundColor": color? color.getValue().shift(0, 1).toString() : 'rgba(0,0,0,0)'}}
         /> 
       </div> 
     );
