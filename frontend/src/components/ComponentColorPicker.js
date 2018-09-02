@@ -1,18 +1,19 @@
 import React from 'react';
-import {RgbaPicker} from "react-rgba-color-picker";
+import { RgbaPicker } from "react-rgba-color-picker";
 class ComponentColorPicker extends React.Component {
 
 
   constructor(props) {
-    super(); 
+    super();
+
     this.state = {
       color: props.color
     }
   }
 
-  handleChange  = (color) => {
-      this.setState({color: color});      
-      this.props.changeEvent(color);
+  handleChange = (color) => {
+    this.setState({ color: color });
+    this.props.changeEvent(color);
 
   }
 
@@ -26,14 +27,15 @@ class ComponentColorPicker extends React.Component {
   }
 
   render() {
+
     return (
-        <RgbaPicker color={this.state.color} onChange={this.handleChange} />
-        );
-      }
-    }
+      <RgbaPicker color={this.state.color} onChange={this.handleChange} />
+    );
+  }
+}
 
-    ComponentColorPicker.displayName = 'ColorParam';
-    ComponentColorPicker.propTypes = {};
-    ComponentColorPicker.defaultProps = {};
+ComponentColorPicker.displayName = 'ColorParam';
+ComponentColorPicker.propTypes = {};
+ComponentColorPicker.defaultProps = {};
 
-    export default ComponentColorPicker;
+export default ComponentColorPicker;

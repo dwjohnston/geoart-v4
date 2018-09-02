@@ -24,6 +24,7 @@
       flex-flow: row nowrap; 
       position: relative; // justify-content: flex-start;
       align-items: stretch;
+      overflow-x: auto;
 
 
       @include landscape {

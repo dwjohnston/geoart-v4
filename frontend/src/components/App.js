@@ -1,6 +1,6 @@
 import React from 'react';
 import { Canvas, CanvasCore, CanvasLayer } from 'blacksheep-react-canvas';
-import { Test, GeoPlanets, GeoPlanetsTwo, ThreeOrbits, NGeo, Strings, ThreeOrbitsGeo, EarthVenus, TestTwo } from "geoplanets-model";
+import { Test, GeoPlanets, Flowers, GeoPlanetsTwo, ThreeOrbits, NGeo, Strings, ThreeOrbitsGeo, EarthVenus, TestTwo } from "geoplanets-model";
 import SimpleCarousel from 'blacksheep-react-carousel';
 import ShareOverlay from "./ShareOverlay";
 import AlgorithmControls from "./AlgorithmControls";
@@ -18,7 +18,7 @@ import shortid from "shortid";
 import GlobalControls from './GlobalControls';
 
 
-const version = "1.10";
+const version = "1.20";
 
 class AppComponent extends React.Component {
 
@@ -36,16 +36,18 @@ class AppComponent extends React.Component {
 
 
     this.algorithms = [
-      new Strings(),
-      new TestTwo(),
       new ThreeOrbits(),
+
+      new TestTwo(),
+      new Strings(),
+
       new ThreeOrbitsGeo(),
       new EarthVenus(),
-      new GeoPlanets(),
+      //new GeoPlanets(),
       new GeoPlanetsTwo(),
       new NGeo(),
-      new Test(),
-
+      //new Test(),
+      new Flowers(),
     ];
 
     let core = new CanvasCore("#000000", 0.04, 2);
@@ -154,9 +156,6 @@ class AppComponent extends React.Component {
     this.setState({ algorithm: algo });
   }
 
-  onParamChange = (param, v) => {
-    param.hasChanged = true;
-  };
 
   render() {
 
@@ -199,7 +198,6 @@ class AppComponent extends React.Component {
 
           <AlgorithmControls
             algorithm={this.state.algorithm}
-            onChange={this.onParamChange}
 
           />
           <Contact />
