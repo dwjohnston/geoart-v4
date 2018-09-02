@@ -7,24 +7,25 @@ import { Handle, Track } from "./slider/slider";
 
 
 
- class ComponentSlider extends React.Component {
+class ComponentSlider extends React.Component {
 
 
 
-    constructor(props) {
-      super();
-      this.state = {
-        v: props.param.value
-      }; 
-    }
+  constructor(props) {
+    super();
 
-    onChange = (v) =>  {
-      this.setState({v: v[0]}); 
-      this.props.changeEvent(v[0]); 
-    }
+    this.state = {
+      v: props.param.value
+    };
+  }
 
-    render() {
-    const {param} = this.props;
+  onChange = (v) => {
+    this.setState({ v: v[0] });
+    this.props.changeEvent(v[0]);
+  }
+
+  render() {
+    const { param } = this.props;
     let handles = [1];
     let tracks = [1];
     return (<div className="slider-wrapper">
@@ -38,7 +39,7 @@ import { Handle, Track } from "./slider/slider";
         values={[this.state.v]}
         mode={2}
         vertical={true}
-        reversed = {true}
+        reversed={true}
         onChange={this.onChange}
       >
 
@@ -83,14 +84,15 @@ import { Handle, Track } from "./slider/slider";
 
       </Slider>
       <div className="value">
-          {this.state.v}
+        {this.state.v}
       </div>
     </div>
 
 
 
     );
-  }}
+  }
+}
 
 ComponentSlider.displayName = 'SliderWrapper';
 ComponentSlider.propTypes = {};

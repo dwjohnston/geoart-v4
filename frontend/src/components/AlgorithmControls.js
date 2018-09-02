@@ -22,6 +22,10 @@ import 'react-tabs/style/react-tabs.css';
 import { fullClone } from 'davids-toolbox';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faPen, faCog } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faPen, faCog);
 
 
 class AlgorithmControls extends React.Component {
@@ -39,6 +43,9 @@ class AlgorithmControls extends React.Component {
   }
 
   componentDidMount() {
+
+    this.renderTabs();
+    this.renderTabPanels();
   }
 
   // componentWillReceiveProps(props) {
@@ -51,10 +58,25 @@ class AlgorithmControls extends React.Component {
   //   });
   // }
 
+
+  componentWillReceiveProps() {
+
+    this.setState({
+      panels: null,
+    });
+
+  }
+
+  componentDidUpdate() {
+
+    if (!this.state.panels) {
+      this.renderTabs();
+      this.renderTabPanels();
+    }
+  }
+
   renderParameter(param, id) {
-
     param.id = [id, "param", param.label].join("-");
-
     return <ComponentSlider param={param} key={param.id}
       changeEvent={(v) => {
         param.updateValue(v);
@@ -117,7 +139,9 @@ class AlgorithmControls extends React.Component {
       </Tab>);
     }
 
-    return tabs;
+    this.setState({
+      tabs: tabs
+    });
 
   }
 
@@ -128,21 +152,31 @@ class AlgorithmControls extends React.Component {
 
     for (let [key, group] of Object.entries(algoParams)) {
       let rkey = [this.props.algorithm.name, "tab-panel", i++].join("-");
-      panels.push(<TabPanel key={rkey}>{this.genericRender(group, key)}</TabPanel>);
+
+      panels.push(
+        <TabPanel key={rkey}>
+          {this.genericRender(group, key)}
+        </TabPanel>
+      );
     }
 
-    return panels;
+    this.setState({
+      panels: panels
+    });
   }
 
   render() {
 
     return (
       <div className="algorithmcontrols-component">
-        <Tabs>
+        <Tabs >
           <TabList>
-            {this.renderTabs()}
+
+            {this.state.tabs}
+            {/* {this.renderTabs()} */}
           </TabList>
-          {this.renderTabPanels()}
+          {/* {this.renderTabPanels()} */}
+          {this.state.panels}
         </Tabs>
 
       </div>

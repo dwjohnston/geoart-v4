@@ -3,7 +3,6 @@ const functions = require('firebase-functions');
 const admin = require("firebase-admin");
 const Twitter = require('twitter');
 var serviceAccount = require('./admin-credential-geoart-staging-firebase-adminsdk-8vzo5-6f60463b2e.json');
-import moment from "moment";
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -126,23 +125,23 @@ exports.onNewImage = functions.storage.object().onFinalize((object) => {
       });
 
 
-      fetch("https://platform.hootsuite.com/v1/messages", {
-        method: "POST",
-        body: {
-          text: "test",
-          socialProfileIds: ["geoplanets.io"],
-          scheduledSendTime: moment().format() + "Z",
-          media: file
+      // fetch("https://platform.hootsuite.com/v1/messages", {
+      //   method: "POST",
+      //   body: {
+      //     text: "test",
+      //     socialProfileIds: ["geoplanets.io"],
+      //     scheduledSendTime: moment().format() + "Z",
+      //     media: file
 
-        }
-      }
+      //   }
+      // }
 
 
-      ).then((res) => {
-        console.log("sucess");
-      }).catch(err => {
-        console.log(err)
-      });
+      // ).then((res) => {
+      //   console.log("sucess");
+      // }).catch(err => {
+      //   console.log(err)
+      // });
 
     }
   });
