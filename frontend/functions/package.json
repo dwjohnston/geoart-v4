@@ -10,20 +10,20 @@
     "logs": "firebase functions:log"
   },
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.16.3",
-    "firebase": "^5.0.3",
-    "firebase-admin": "~5.12.0",
-    "firebase-functions": "^1.0.1",
-    "image-data-uri": "^1.1.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "firebase": "^5.5.4",
+    "firebase-admin": "^5.12.1",
+    "firebase-functions": "^1.1.0",
+    "image-data-uri": "^1.1.1",
     "moment": "^2.22.2",
     "progress-stream": "^2.0.0",
-    "shortid": "^2.2.8",
+    "shortid": "^2.2.13",
     "twitter": "^1.7.1"
   },
   "devDependencies": {
     "eslint": "^4.12.0",
-    "eslint-plugin-promise": "^3.6.0"
+    "eslint-plugin-promise": "^3.8.0"
   },
   "private": true
 }
