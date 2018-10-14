@@ -68,9 +68,9 @@ class AppComponent extends React.Component {
     });
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
-  componentDidUpdate() {}
+  componentDidUpdate() { }
 
   handleGetJpeg(v) {
     this.setState({
@@ -142,7 +142,7 @@ class AppComponent extends React.Component {
 
   render() {
     return (
-      <div className="index">
+      <main className="index">
         <header>
           <HelpOverlay />
           <span className="build-num">geoplanets.io {version}</span>
@@ -192,7 +192,7 @@ class AppComponent extends React.Component {
         </div>
 
         <footer />
-      </div>
+      </main>
     );
   }
 }
