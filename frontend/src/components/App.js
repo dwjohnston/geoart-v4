@@ -16,6 +16,7 @@ import SimpleCarousel from "blacksheep-react-carousel";
 import ShareOverlay from "./ShareOverlay";
 import AlgorithmControls from "./AlgorithmControls";
 import Contact from "./Contact";
+import { withStyles } from '@material-ui/core/styles';
 
 import fireApp from "../store/google-store";
 import firebase from "firebase";
@@ -27,7 +28,7 @@ import { withRouter } from "react-router-dom";
 
 import shortid from "shortid";
 import GlobalControls from "./GlobalControls";
-
+import Header from "./layout/Header/Header";
 const version = "1.21";
 
 class AppComponent extends React.Component {
@@ -141,27 +142,15 @@ class AppComponent extends React.Component {
   };
 
   render() {
+
+    const { classes } = this.props;
+
     return (
-      <main className="index">
-        <header>
-          <HelpOverlay />
-          <span className="build-num">geoplanets.io {version}</span>
+      <main className="index" className={classes.root}>
 
-          <button className="btn btn-share" onClick={this.share}>
-            <i className="fas fa-share-alt" />
-            <span> share your creation</span>
-          </button>
-        </header>
+        <Header className={classes.header} />
 
-        <ShareOverlay
-          visible={this.state.showShareDialog}
-          currentJpeg={this.state.currentJpeg}
-          imageUrl={this.state.imageUrl}
-          progress={this.state.uploadProgress}
-          onClose={this.closeShare}
-        />
-
-        <div className="canvas-container">
+        <div className={classes.canvas}>
           <Canvas
             id="test-canvas"
             canvasCore={this.state.canvasCore}
@@ -173,11 +162,12 @@ class AppComponent extends React.Component {
           />
         </div>
         <GlobalControls
+          className={classes.globalControls}
           algorithm={this.state.algorithm}
           onEvent={this.handleGlobalEvent}
         />
 
-        <div className="controls">
+        <div className={classes.controls}>
           <SimpleCarousel
             sourceObjects={this.algorithms}
             labelFn={v => {
@@ -191,7 +181,7 @@ class AppComponent extends React.Component {
           <Contact />
         </div>
 
-        <footer />
+        <footer className={classes.footer} />
       </main>
     );
   }
@@ -199,4 +189,36 @@ class AppComponent extends React.Component {
 
 AppComponent.defaultProps = {};
 
-export default withRouter(AppComponent);
+
+const styles = {
+  root: {
+    height: "100%",
+    display: "grid",
+    gridTemplateColumns: "auto 30px",
+    gridTemplateRows: "auto 1fr 200px 15px",
+    gridTemplateAreas: '"header header" "canvas global" "controls controls" "footer footer"'
+  },
+  header: {
+    border: "solid 1px black",
+    gridArea: "header",
+  },
+  canvas: {
+    gridArea: "canvas",
+    position: "relative",
+
+    "& canvas": {
+      position: "absolute",
+    }
+  },
+  globalControls: {
+    gridArea: "global",
+  },
+  controls: {
+    gridArea: "controls",
+  },
+  footer: {
+    gridArea: "footer"
+  },
+}
+
+export default withRouter(withStyles(styles)(AppComponent));
